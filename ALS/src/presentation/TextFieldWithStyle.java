@@ -14,7 +14,7 @@ public class TextFieldWithStyle extends TextField {
 
 	public TextFieldWithStyle(String prompt, GridPaneCenter grid, int row, int col) {
 		super.setPromptText(prompt);
-		super.getStylesheets().add("/student_attendance_system/TextField.css");
+		super.getStylesheets().add("/presentation/TextField.css");
 
 		super.setFont(Font.font("Calibri", 24));
 		super.setPrefSize(400, 80);
