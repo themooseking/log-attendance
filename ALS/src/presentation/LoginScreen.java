@@ -22,7 +22,7 @@ public class LoginScreen {
 		vbox = new VBox(title(), loginSetup());
 		vbox.setAlignment(Pos.CENTER);
 
-		Scene scene = new Scene(vbox, 1800, 1100);
+		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
 	}
 	
