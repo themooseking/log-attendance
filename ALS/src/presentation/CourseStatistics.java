@@ -2,39 +2,38 @@ package presentation;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import logic.CalculateAttendance;
 
-public class LoginScreen {
+public class CourseStatistics {
 
 	private Stage primaryStage;
 	private VBox vbox;
 
-	public LoginScreen(Stage primaryStage) {
+	public CourseStatistics(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
 
-	public void loginUI() {
-		vbox = new VBox(title(), loginSetup());
+	public void courseStatisticsUI() {
+		vbox = new VBox(title(), barDiagram());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
 	}
 	
-	private GridPane loginSetup() {
+	private GridPane barDiagram() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-		TextFieldWithStyle tfUsername = new TextFieldWithStyle("Username", grid, 0, 0);
-		
-		ButtonWithStyle btnLogin = new ButtonWithStyle("Login", grid, 0, 1);
-		btnLogin.setOnAction(e -> {
-			
-		});
+//		BarChart<X, Y>
+		CalculateAttendance test = new CalculateAttendance();
+		test.calcAttendancePerc();
 		
 		return grid;
 	}
@@ -44,7 +43,7 @@ public class LoginScreen {
 	//////////////////////////////
 
 	private Label title() {
-		Label label = new Label("Welcome to my system, human.");
+		Label label = new Label("2 Semester stats :)");
 		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
 		return label;
 	}
