@@ -22,7 +22,7 @@ public class CalculateAttendance {
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
 			for (int j = 0; j < absenceList.size(); j++) {
 				if (i.equals(absenceList[j].getDate())) { 
-					arr[index]++;
+					arr[index]++; 
 				}
 				index++;
 			}
