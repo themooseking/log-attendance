@@ -1,30 +1,26 @@
 package logic;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class CalculateAttendance {
-	private Date startDate = new Date(2020-03-01);
-	private Date endDate = new Date(2020-03-18);
+	private LocalDate startDate = LocalDate.parse("2020-03-01");
+	private LocalDate endDate = LocalDate.parse("2020-03-18");
+	private long daySpan = ChronoUnit.DAYS.between(startDate, endDate);
 	private DB_Controller controller;
-//	private ArrayList<Absence> absenceList = controller.getAbsenceList();
+	private ArrayList<Absence> absenceList = controller.getAbsenceList();
 //	private ArrayList<Student> studentList = controller.getStudentList();
 //	private ArrayList<Timetable> timetableList = controller.getTimetableList();
+	private int[] arr = new int[(int) daySpan];
 	
 	public void calcAttendancePerc() {
-		for (Date i = startDate; i.after(endDate); nextDate(i)) {
-			System.out.println(nextDate(i));
+		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
+			for (int j = 0; j < absenceList.length; j++) {
+				if (i.equals(absenceList[j])) {
+					
+				}
+			}
 		}
-		
 	}
-	
-	private Date nextDate(Date date) {
-		LocalDate tempDate = date.toLocalDate();
-		
-		tempDate.plusDays(1);
-		
-		date = Date.valueOf(tempDate);
-		
-		return date;
-	}
+
 }
