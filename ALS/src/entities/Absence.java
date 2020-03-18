@@ -3,7 +3,6 @@ package entities;
 import java.sql.Date;
 
 public class Absence {
-
 	private Date date;
 	private Student student;
 	private Course course;

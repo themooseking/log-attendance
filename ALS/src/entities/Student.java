@@ -1,17 +1,19 @@
 package entities;
 
 public class Student {
-	
-	private int studentId;
-	private int semesterNo;
+	private int studentId;	
 	private String firstName;
 	private String lastName;
+	private int semesterNo;
 	
-	public Student(int studentId, int semesterNo, String firstName, String lastName) {
+	public Student(int studentId, String firstName, String lastName, int semesterNo) {
 		this.studentId = studentId;
-		this.semesterNo = semesterNo;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.semesterNo = semesterNo;
 	}
-	
+
+	public int getStudentId() {
+		return studentId;
+	}
 }

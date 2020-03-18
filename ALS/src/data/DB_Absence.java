@@ -2,6 +2,7 @@ package data;
 
 import java.sql.*;
 import java.util.ArrayList;
+import entities.*;
 
 public class DB_Absence {
 	private Connection connection;
@@ -25,18 +26,25 @@ public class DB_Absence {
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {
-				Team scoringTeam = null;
-				for (int i = 0; i < teamList.size(); i++) {
-					if (teamList.get(i).getTeamId() == resultSet.getInt("scoringteam")) {
-						scoringTeam = teamList.get(i);
+				Student student = null;
+				for (int i = 0; i < studentList.size(); i++) {
+					if (studentList.get(i).getStudentId() == resultSet.getInt("id")) {
+						student = studentList.get(i);
+						break;
+					}
+				}
+				
+				Course course = null;
+				for (int i = 0; i < courseList.size(); i++) {
+					if (courseList.get(i).getCourseId() == resultSet.getInt("id")) {
+						course = courseList.get(i);
 						break;
 					}
 				}
 
-				MatchTime matchTime = new MatchTime(resultSet.getInt("matchtime"));
-				int matchId = resultSet.getInt("matchid");
+				Date date = resultSet.getDate("absence_date");
 
-				Absence absence = new Absence(scoringTeam, matchTime, matchId);
+				Absence absence = new Absence(date, student, );
 
 				absenceList.add(absence);
 			}
