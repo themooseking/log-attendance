@@ -15,24 +15,21 @@ public class CalculateAttendance {
 	private DB_Controller controller;
 	private ArrayList<Absence> absenceList = controller.getAbsenceList();
 	private ArrayList<Student> studentList = controller.getStudentList();
-	private ArrayList<Timetable> timetableList = controller.getTimetableList();
 	private int[] arr = new int[(int) daySpan];
 	
 	public int[] calcAttendancePerc() {
 		int index = 0;
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
 			for (int j = 0; j < absenceList.size(); j++) {
-				if (i.equals(absenceList[j].getDate())) { 
+				if (i.equals(absenceList.get(j).getDate())) { 
 					arr[index]++; 
 				}
 				index++;
 			}
 		}
-		
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = arr[i] / studentList.size() * 100;
 		}
-		
 		return arr;
 	}
 
