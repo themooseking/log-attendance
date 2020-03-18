@@ -19,13 +19,15 @@ public class DB_Absence {
 		ArrayList<Absence> absenceList = new ArrayList<>();
 
 		try {
-			String sql = "SELECT * FROM goals";
+			String sql = "SELECT * FROM absence";
 
 			Statement statement = connection.createStatement();
 
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {
+				Date date = resultSet.getDate("absence_date");
+				
 				Student student = null;
 				for (int i = 0; i < studentList.size(); i++) {
 					if (studentList.get(i).getStudentId() == resultSet.getInt("id")) {
@@ -42,9 +44,7 @@ public class DB_Absence {
 					}
 				}
 
-				Date date = resultSet.getDate("absence_date");
-
-				Absence absence = new Absence(date, student, );
+				Absence absence = new Absence(date, student, course);
 
 				absenceList.add(absence);
 			}
