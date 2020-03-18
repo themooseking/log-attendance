@@ -32,14 +32,15 @@ public class CalculateAttendance {
 	}
 	
 	public int calcAttendancePercDay(LocalDate date) {
+		int absent = 0;
 		
 		for (int j = 0; j < absenceList.size(); j++) {
 			if (date.equals(absenceList.get(j).getDate())) { 
-				return 0;
+				absent++;
 			}
 		}
 		
-		return -1;
+		return absent / studentList.size() * 100;
 	}
 
 	public LocalDate getStartDate() {
