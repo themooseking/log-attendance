@@ -3,6 +3,9 @@ package presentation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -31,9 +34,28 @@ public class CourseStatistics {
 	private GridPane barDiagram() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-//		BarChart<X, Y>
-		CalculateAttendance test = new CalculateAttendance();
-		test.calcAttendancePerc();
+		CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setLabel("Days");
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Absence");
+
+        BarChart barChart = new BarChart(xAxis, yAxis);
+
+        XYChart.Series dataSeries1 = new XYChart.Series();
+        dataSeries1.setName("Systemudvikling2");
+
+        dataSeries1.getData().add(new XYChart.Data("Monday", 10));
+        dataSeries1.getData().add(new XYChart.Data("Tuesday"  , 5));
+        dataSeries1.getData().add(new XYChart.Data("Wednesday"  , 100));
+        dataSeries1.getData().add(new XYChart.Data("Thursday", 5));
+        dataSeries1.getData().add(new XYChart.Data("Friday"  , 30));
+
+
+        barChart.getData().add(dataSeries1);
+        
+		//CalculateAttendance test = new CalculateAttendance();
+		//test.calcAttendancePerc();
 		
 		return grid;
 	}
