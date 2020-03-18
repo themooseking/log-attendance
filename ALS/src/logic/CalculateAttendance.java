@@ -31,7 +31,7 @@ public class CalculateAttendance {
 		return arr;
 	}
 	
-	public int calcAttendancePercDay(LocalDate date) {
+	public float calcAttendancePercDay(LocalDate date) {
 		int absent = 0;
 		
 		for (int j = 0; j < absenceList.size(); j++) {
@@ -39,8 +39,8 @@ public class CalculateAttendance {
 				absent++;
 			}
 		}
-		
-		return absent / studentList.size() * 100;
+		System.out.println(studentList.size());
+		return (float) (absent / studentList.size() * 100);
 	}
 
 	public LocalDate getStartDate() {

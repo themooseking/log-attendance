@@ -20,6 +20,7 @@ public class CourseStatistics {
 
 	private Stage primaryStage;
 	private VBox vbox;
+	private CalculateAttendance calcAtt = new CalculateAttendance();
 
 	public CourseStatistics(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -34,8 +35,6 @@ public class CourseStatistics {
 	}
 	
 	private GridPane barDiagram() {
-		CalculateAttendance calcAtt = new CalculateAttendance();
-		
 		GridPaneCenter grid = new GridPaneCenter();
 		
 		CategoryAxis xAxis = new CategoryAxis();
@@ -53,11 +52,11 @@ public class CourseStatistics {
         	sys2DataSeries.getData().add(new XYChart.Data(i.toString(), calcAtt.calcAttendancePercDay(i)));
 		}
         
-        sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
-        sys2DataSeries.getData().add(new XYChart.Data("Tuesday"  , 5));
-        sys2DataSeries.getData().add(new XYChart.Data("Wednesday"  , 100));
-        sys2DataSeries.getData().add(new XYChart.Data("Thursday", 5));
-        sys2DataSeries.getData().add(new XYChart.Data("Friday"  , 30));
+//        sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
+//        sys2DataSeries.getData().add(new XYChart.Data("Tuesday"  , 5));
+//        sys2DataSeries.getData().add(new XYChart.Data("Wednesday"  , 100));
+//        sys2DataSeries.getData().add(new XYChart.Data("Thursday", 5));
+//        sys2DataSeries.getData().add(new XYChart.Data("Friday"  , 30));
 
 
         barChart.getData().add(sys2DataSeries);
