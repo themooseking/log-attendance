@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import entities.Absence;
 import entities.Student;
+import entities.Timetable;
 
 public class CalculateAttendance {
 	private LocalDate startDate = LocalDate.parse("2020-03-01");
