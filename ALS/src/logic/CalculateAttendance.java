@@ -16,7 +16,7 @@ public class CalculateAttendance {
 	public void calcAttendancePerc() {
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
 			for (int j = 0; j < absenceList.length; j++) {
-				if (i.equals(absenceList[j])) {
+				if (i.equals(absenceList[j])) { 
 					
 				}
 			}
