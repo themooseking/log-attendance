@@ -1,13 +1,13 @@
 package entities;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Absence {
-	private Date date;
+	private LocalDate date;
 	private Student student;
 	private Course course;
 	
-	public Absence(Date date, Student student, Course course) {
+	public Absence(LocalDate date, Student student, Course course) {
 		this.date = date;
 		this.student = student;
 		this.course = course;

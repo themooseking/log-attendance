@@ -1,6 +1,7 @@
 package data;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import entities.*;
 
@@ -27,6 +28,7 @@ public class DB_Absence {
 
 			while (resultSet.next()) {
 				Date date = resultSet.getDate("absence_date");
+				LocalDate localDate = date.toLocalDate();
 				
 				Student student = null;
 				for (int i = 0; i < studentList.size(); i++) {
@@ -44,7 +46,7 @@ public class DB_Absence {
 					}
 				}
 
-				Absence absence = new Absence(date, student, course);
+				Absence absence = new Absence(localDate, student, course);
 
 				absenceList.add(absence);
 			}

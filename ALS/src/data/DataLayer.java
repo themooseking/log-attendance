@@ -9,7 +9,7 @@ public class DataLayer {
 	private Connection connection; 
 
 	public DataLayer() {
-		databaseName = "HLSDB";
+		databaseName = "ALSDB";
 
 		loadJdbcDriver();
 		openConnection(databaseName);
