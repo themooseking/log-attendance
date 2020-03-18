@@ -34,8 +34,7 @@ public class CourseStatistics {
 	}
 	
 	private GridPane barDiagram() {
-		//CalculateAttendance calcAtt = new CalculateAttendance();
-		//int[] arr = calcAtt.calcAttendancePerc();
+		CalculateAttendance calcAtt = new CalculateAttendance();
 		
 		GridPaneCenter grid = new GridPaneCenter();
 		
@@ -50,12 +49,9 @@ public class CourseStatistics {
         XYChart.Series sys2DataSeries = new XYChart.Series();
         sys2DataSeries.setName("Systemudvikling2");
 
-//        for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
-//        	int j = 0;
-//        	dataSeries1.getData().add(new XYChart.Data(i.toString(), arr[j]));
-//        	
-//        	j++;
-//		}
+        for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
+        	sys2DataSeries.getData().add(new XYChart.Data(i.toString(), calcAtt.calcAttendancePercDay(i)));
+		}
         
         sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
         sys2DataSeries.getData().add(new XYChart.Data("Tuesday"  , 5));
