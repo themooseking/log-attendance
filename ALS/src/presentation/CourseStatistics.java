@@ -27,42 +27,41 @@ public class CourseStatistics {
 	}
 
 	public void courseStatisticsUI() {
-		vbox = new VBox(title(),barDiagram());
+		vbox = new VBox(title(), barDiagram());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
 	}
-	
+
 	private GridPane barDiagram() {
 		GridPaneCenter grid = new GridPaneCenter();
-		
+
 		CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Days");
+		xAxis.setLabel("Days");
 
-        NumberAxis yAxis = new NumberAxis(0, 100, 5);
-        yAxis.setLabel("Absence");
+		NumberAxis yAxis = new NumberAxis(0, 100, 5);
+		yAxis.setLabel("Absence");
 
-        BarChart barChart = new BarChart(xAxis, yAxis);
+		BarChart barChart = new BarChart(xAxis, yAxis);
 
-        XYChart.Series sys2DataSeries = new XYChart.Series();
-        sys2DataSeries.setName("Systemudvikling2");
+		XYChart.Series sys2DataSeries = new XYChart.Series();
+		sys2DataSeries.setName("Systemudvikling2");
 
-        for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
-        	sys2DataSeries.getData().add(new XYChart.Data(i.toString(), calcAtt.calcAttendancePercDay(i)));
+		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
+			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), calcAtt.calcAttendancePercDay(i)));
 		}
-        
+
 //        sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
 //        sys2DataSeries.getData().add(new XYChart.Data("Tuesday"  , 5));
 //        sys2DataSeries.getData().add(new XYChart.Data("Wednesday"  , 100));
 //        sys2DataSeries.getData().add(new XYChart.Data("Thursday", 5));
 //        sys2DataSeries.getData().add(new XYChart.Data("Friday"  , 30));
 
+		barChart.getData().add(sys2DataSeries);
 
-        barChart.getData().add(sys2DataSeries);
-        
-        grid.getChildren().add(barChart);
-		
+		grid.getChildren().add(barChart);
+
 		return grid;
 	}
 

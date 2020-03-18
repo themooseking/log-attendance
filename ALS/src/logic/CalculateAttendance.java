@@ -39,8 +39,8 @@ public class CalculateAttendance {
 				absent++;
 			}
 		}
-		System.out.println(studentList.size());
-		return (float) (absent / studentList.size() * 100);
+		System.out.println(((float) absent / studentList.size() * 100));
+		return (float) absent / studentList.size() * 100;
 	}
 
 	public LocalDate getStartDate() {
