@@ -10,7 +10,7 @@ public class CalculateAttendance {
 	private LocalDate startDate = LocalDate.parse("2020-03-01");
 	private LocalDate endDate = LocalDate.parse("2020-03-18");
 	private long daySpan = ChronoUnit.DAYS.between(startDate, endDate);
-	private DB_Controller controller;
+	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Absence> absenceList = controller.getAbsenceList();
 	private ArrayList<Student> studentList = controller.getStudentList();
 	private int[] arr = new int[(int) daySpan];
