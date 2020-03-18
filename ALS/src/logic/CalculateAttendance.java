@@ -8,7 +8,7 @@ public class CalculateAttendance {
 	private DB_Controller controller;
 	
 	private void calcAttendancePerc() {
-		controller.getAbsenceList;
+		ArrayList<Absence> absenceList = controller.getAbsenceList();
 		
 	}
 }
