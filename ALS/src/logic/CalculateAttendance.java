@@ -11,7 +11,7 @@ public class CalculateAttendance {
 	private ArrayList<Timetable> timetableList = controller.getTimetableList();
 	
 	private void calcAttendancePerc() {
-		for (Date i = startDate; i.before(endDate); i = i.setDate()) {
+		for (Date i = startDate; i.before(endDate); i) {
 			
 		}
 		
