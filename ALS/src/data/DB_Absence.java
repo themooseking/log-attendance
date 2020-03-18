@@ -32,7 +32,7 @@ public class DB_Absence {
 				
 				Student student = null;
 				for (int i = 0; i < studentList.size(); i++) {
-					if (studentList.get(i).getStudentId() == resultSet.getInt("id")) {
+					if (studentList.get(i).getStudentId() == resultSet.getInt("student_id")) {
 						student = studentList.get(i);
 						break;
 					}
@@ -40,7 +40,7 @@ public class DB_Absence {
 				
 				Course course = null;
 				for (int i = 0; i < courseList.size(); i++) {
-					if (courseList.get(i).getCourseId() == resultSet.getInt("id")) {
+					if (courseList.get(i).getCourseId() == resultSet.getInt("course_id")) {
 						course = courseList.get(i);
 						break;
 					}

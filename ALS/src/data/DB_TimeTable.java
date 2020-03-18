@@ -30,7 +30,7 @@ public class DB_TimeTable {
 					
 					Course course = null;
 					for (int i = 0; i < courseList.size(); i++) {
-						if (courseList.get(i).getCourseId() == resultSet.getInt("id")) {
+						if (courseList.get(i).getCourseId() == resultSet.getInt("course_id")) {
 							course = courseList.get(i);
 							break;
 						}
