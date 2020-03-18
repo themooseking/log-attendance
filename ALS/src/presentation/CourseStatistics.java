@@ -24,7 +24,7 @@ public class CourseStatistics {
 	}
 
 	public void courseStatisticsUI() {
-		vbox = new VBox(title(), barDiagram());
+		vbox = new VBox(barDiagram());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
@@ -54,6 +54,7 @@ public class CourseStatistics {
 
         barChart.getData().add(dataSeries1);
         
+        grid.getChildren().add(barChart);
 		//CalculateAttendance test = new CalculateAttendance();
 		//test.calcAttendancePerc();
 		
