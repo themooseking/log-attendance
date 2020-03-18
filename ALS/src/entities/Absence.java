@@ -12,4 +12,8 @@ public class Absence {
 		this.student = student;
 		this.course = course;
 	}
+
+	public LocalDate getDate() {
+		return date;
+	}
 }
