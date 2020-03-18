@@ -52,16 +52,16 @@ public class CourseStatistics {
 
         for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
         	int j = 0;
-        	dataSeries1.getData().add(new XYChart.Data(i, arr[j]));
+        	dataSeries1.getData().add(new XYChart.Data(i.toString(), arr[j]));
         	
         	j++;
 		}
         
-        dataSeries1.getData().add(new XYChart.Data("Monday", 10));
-        dataSeries1.getData().add(new XYChart.Data("Tuesday"  , 5));
-        dataSeries1.getData().add(new XYChart.Data("Wednesday"  , 100));
-        dataSeries1.getData().add(new XYChart.Data("Thursday", 5));
-        dataSeries1.getData().add(new XYChart.Data("Friday"  , 30));
+//        dataSeries1.getData().add(new XYChart.Data("Monday", 10));
+//        dataSeries1.getData().add(new XYChart.Data("Tuesday"  , 5));
+//        dataSeries1.getData().add(new XYChart.Data("Wednesday"  , 100));
+//        dataSeries1.getData().add(new XYChart.Data("Thursday", 5));
+//        dataSeries1.getData().add(new XYChart.Data("Friday"  , 30));
 
 
         barChart.getData().add(dataSeries1);
