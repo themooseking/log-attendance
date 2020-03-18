@@ -3,8 +3,10 @@ package logic;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
 import entities.Absence;
 import entities.Student;
+import entities.Timetable;
 
 public class CalculateAttendance {
 	private LocalDate startDate = LocalDate.parse("2020-03-01");
@@ -29,17 +31,6 @@ public class CalculateAttendance {
 			arr[i] = arr[i] / studentList.size() * 100;
 		}
 		return arr;
-	}
-	
-	public int calcAttendancePercDay(LocalDate date) {
-		
-		for (int j = 0; j < absenceList.size(); j++) {
-			if (date.equals(absenceList.get(j).getDate())) { 
-				return 0;
-			}
-		}
-		
-		return -1;
 	}
 
 	public LocalDate getStartDate() {

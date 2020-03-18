@@ -34,8 +34,8 @@ public class CourseStatistics {
 	}
 	
 	private GridPane barDiagram() {
-		CalculateAttendance calcAtt = new CalculateAttendance();
-		int[] arr = calcAtt.calcAttendancePerc();
+		//CalculateAttendance calcAtt = new CalculateAttendance();
+		//int[] arr = calcAtt.calcAttendancePerc();
 		
 		GridPaneCenter grid = new GridPaneCenter();
 		
@@ -47,28 +47,26 @@ public class CourseStatistics {
 
         BarChart barChart = new BarChart(xAxis, yAxis);
 
-        XYChart.Series dataSeries1 = new XYChart.Series();
-        dataSeries1.setName("Systemudvikling2");
+        XYChart.Series sys2DataSeries = new XYChart.Series();
+        sys2DataSeries.setName("Systemudvikling2");
 
-        for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
-        	int j = 0;
-        	dataSeries1.getData().add(new XYChart.Data(i.toString(), arr[j]));
-        	
-        	j++;
-		}
+//        for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate()); i = i.plusDays(1)) {
+//        	int j = 0;
+//        	dataSeries1.getData().add(new XYChart.Data(i.toString(), arr[j]));
+//        	
+//        	j++;
+//		}
         
-//        dataSeries1.getData().add(new XYChart.Data("Monday", 10));
-//        dataSeries1.getData().add(new XYChart.Data("Tuesday"  , 5));
-//        dataSeries1.getData().add(new XYChart.Data("Wednesday"  , 100));
-//        dataSeries1.getData().add(new XYChart.Data("Thursday", 5));
-//        dataSeries1.getData().add(new XYChart.Data("Friday"  , 30));
+        sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
+        sys2DataSeries.getData().add(new XYChart.Data("Tuesday"  , 5));
+        sys2DataSeries.getData().add(new XYChart.Data("Wednesday"  , 100));
+        sys2DataSeries.getData().add(new XYChart.Data("Thursday", 5));
+        sys2DataSeries.getData().add(new XYChart.Data("Friday"  , 30));
 
 
-        barChart.getData().add(dataSeries1);
+        barChart.getData().add(sys2DataSeries);
         
         grid.getChildren().add(barChart);
-        
-		//test.calcAttendancePerc();
 		
 		return grid;
 	}
