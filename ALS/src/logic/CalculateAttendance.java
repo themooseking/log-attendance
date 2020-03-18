@@ -32,6 +32,21 @@ public class CalculateAttendance {
 		}
 		return arr;
 	}
+<<<<<<< HEAD
+=======
+	
+	public int calcAttendancePercDay(LocalDate date) {
+		int absent = 0;
+		
+		for (int j = 0; j < absenceList.size(); j++) {
+			if (date.equals(absenceList.get(j).getDate())) { 
+				absent++;
+			}
+		}
+		
+		return absent / studentList.size() * 100;
+	}
+>>>>>>> branch 'master' of https://github.com/themooseking/log-attendance.git
 
 	public LocalDate getStartDate() {
 		return startDate;
