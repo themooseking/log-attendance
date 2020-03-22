@@ -1,12 +1,8 @@
 package presentation;
 
-import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -34,13 +30,13 @@ public class RadioButtonWithStyle extends RadioButton {
 	public void enterEffect(RadioButton obj) {
 		obj.setCursor(Cursor.HAND);
 		
-		obj.setTextFill(Color.RED);
+		obj.setTextFill(Color.web("#118ABB"));
 	}
 
 	public void defaultEffect(RadioButton obj) {
 		obj.setCursor(Cursor.DEFAULT);
 
-		obj.setTextFill(Color.web("#000000"));
+		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 
 }
