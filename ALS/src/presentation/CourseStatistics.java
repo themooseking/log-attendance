@@ -24,10 +24,10 @@ public class CourseStatistics {
 	private LocalDate endDate;
 	private String selectedCourse;
 
-	public CourseStatistics(Stage primaryStage, LocalDate startDate2, LocalDate endDate2, String rb) {
+	public CourseStatistics(Stage primaryStage, LocalDate startDate, LocalDate endDate, String rb) {
 		this.primaryStage = primaryStage;
-		this.startDate = startDate2;
-		this.endDate = endDate2;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.selectedCourse = rb;
 	}
 
