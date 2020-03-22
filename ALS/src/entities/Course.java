@@ -16,4 +16,8 @@ public class Course {
 	public int getCourseId() {
 		return courseId;
 	}
+	
+	public String getCourseName() {
+		return courseName;
+	}
 }
