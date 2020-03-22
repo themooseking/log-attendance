@@ -28,25 +28,23 @@ public class ButtonWithStyle extends Button {
 	}
 	
 	public void enterEffect(Button obj) {
-		BackgroundFill background_fill = new BackgroundFill(Color.web("#707070"), new CornerRadii(10), Insets.EMPTY);
+		BackgroundFill background_fill = new BackgroundFill(Color.web("#118ABB"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
 		obj.setBackground(background);
-		obj.setStyle("-fx-border-radius: 5; -fx-border-color: #707070; -fx-border-width: 3;");
 		obj.setCursor(Cursor.HAND);
 
-		obj.setTextFill(Color.web("#FFFFFF"));
+		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 
 	public void defaultEffect(Button obj) {
-		BackgroundFill background_fill = new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10), Insets.EMPTY);
+		BackgroundFill background_fill = new BackgroundFill(Color.web("#3D3D3D"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
 		obj.setBackground(background);
-		obj.setStyle("-fx-border-radius: 5; -fx-border-color: #707070; -fx-border-width: 3;");
 		obj.setCursor(Cursor.DEFAULT);
 
-		obj.setTextFill(Color.web("#000000"));
+		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 
 }

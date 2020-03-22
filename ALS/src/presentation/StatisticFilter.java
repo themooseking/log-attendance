@@ -73,7 +73,11 @@ public class StatisticFilter {
 		DatePickerWithStyle startDP = new DatePickerWithStyle(grid, 0, 0);
 		startDP.setValue(startDate);
 		startDP.setOnAction(e -> {
-			startDate = startDP.getValue();
+			if (startDP.getValue().isAfter(endDate)) {
+				startDP.setValue(startDate);
+			} else {
+				startDate = startDP.getValue();
+			}
 		});
 
 		return grid;
@@ -87,6 +91,8 @@ public class StatisticFilter {
 		endDP.setOnAction(e -> {
 			if (endDP.getValue().isAfter(LocalDate.now())) {
 				endDP.setValue(endDate);
+			} else if (endDP.getValue().isBefore(startDate)) {
+				endDP.setValue(endDate);
 			} else {
 				endDate = endDP.getValue();
 			}
@@ -99,13 +105,27 @@ public class StatisticFilter {
 	// FETCH AND BACK
 	//////////////////////////////
 
-	private GridPane buttons() {
+	private HBox buttons() {
+		HBox hbox = new HBox(fetchButton(), backButton());
+		hbox.setAlignment(Pos.CENTER);
+
+		return hbox;
+	}
+
+	private GridPane fetchButton() {
 		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
 			new CourseStatistics(primaryStage, startDate, endDate, selectedCourse).courseStatisticsUI();
 		});
+
+		return grid;
+	}
+
+	private GridPane backButton() {
+		GridPaneCenter grid = new GridPaneCenter();
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
@@ -135,5 +155,4 @@ public class StatisticFilter {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
 }
