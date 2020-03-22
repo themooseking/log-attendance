@@ -24,11 +24,11 @@ public class CourseStatistics {
 	private LocalDate endDate;
 	private String selectedCourse;
 
-	public CourseStatistics(Stage primaryStage, LocalDate startDate, LocalDate endDate, String rb) {
+	public CourseStatistics(Stage primaryStage, LocalDate startDate, LocalDate endDate, String selectedCourse) {
 		this.primaryStage = primaryStage;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		this.selectedCourse = rb;
+		this.selectedCourse = selectedCourse;
 	}
 
 	public void courseStatisticsUI() {
