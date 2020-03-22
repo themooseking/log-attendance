@@ -59,7 +59,6 @@ public class LoginScreen {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		vbox.setBackground(new Background(new BackgroundFill(Color.web("#ECE287"), new CornerRadii(0), Insets.EMPTY)));
 		primaryStage.setTitle("ALS");
 		primaryStage.setScene(scene);
 		primaryStage.show();

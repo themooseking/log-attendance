@@ -2,7 +2,6 @@ package presentation;
 
 import java.time.LocalDate;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -10,12 +9,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -26,9 +20,15 @@ public class CourseStatistics {
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
 	private CalculateAttendance calcAtt = new CalculateAttendance();
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private String selectedCourse;
 
-	public CourseStatistics(Stage primaryStage) {
+	public CourseStatistics(Stage primaryStage, LocalDate startDate2, LocalDate endDate2, String rb) {
 		this.primaryStage = primaryStage;
+		this.startDate = startDate2;
+		this.endDate = endDate2;
+		this.selectedCourse = rb;
 	}
 
 	public void courseStatisticsUI() {
@@ -85,7 +85,6 @@ public class CourseStatistics {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		vbox.setBackground(new Background(new BackgroundFill(Color.web("#ECE287"), new CornerRadii(0), Insets.EMPTY)));
 		primaryStage.setTitle("ALS");
 		primaryStage.setScene(scene);
 		primaryStage.show();
