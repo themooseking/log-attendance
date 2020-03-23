@@ -20,4 +20,8 @@ public class Course {
 	public String getCourseName() {
 		return courseName;
 	}
+	
+	public int getSemesterNo() {
+		return semesterNo;
+	}
 }

@@ -19,7 +19,13 @@ public class DB_Controller {
 		ArrayList<Student> studentList = getStudentList();
 		ArrayList<Course> courseList = getCourseList();
 		
-		return absenceDB.getAbsence(studentList, courseList);
+		return absenceDB.getAllAbsence(studentList, courseList);
+	}
+	
+	public ArrayList<Absence> getAbsenceByCourse(Course course){
+		ArrayList<Student> studentList = getStudentList();
+		
+		return absenceDB.getAbsenceByCourse(studentList, course);
 	}
 	
 	public ArrayList<Course> getCourseList(){
@@ -27,7 +33,11 @@ public class DB_Controller {
 	}
 	
 	public ArrayList<Student> getStudentList(){
-		return studentDB.getStudents();
+		return studentDB.getAllStudents();
+	}
+	
+	public ArrayList<Student> getStudentsByCourse(Course course){
+		return studentDB.getStudentsByCourse(course);
 	}
 	
 	public ArrayList<Timetable> getTimeTableList(){
