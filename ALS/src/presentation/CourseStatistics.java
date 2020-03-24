@@ -8,8 +8,11 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -33,7 +36,7 @@ public class CourseStatistics {
 
 	public void courseStatisticsUI() {
 		vbox = new VBoxWithStyle(title(), barDiagram());
-		vbox.setAlignment(Pos.CENTER);
+		vbox.setAlignment(Pos.CENTER); 
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
@@ -69,7 +72,37 @@ public class CourseStatistics {
 
 		return grid;
 	}
+	
+	//////////////////////////////
+	// Selector
+	//////////////////////////////
 
+	private GridPane attendanceSelector() {
+		GridPaneCenter grid = new GridPaneCenter();
+		
+		CheckBox selector = new CheckBox("Attendance");
+		boolean isSelected = selector.isSelected();
+		if (isSelected = true) {
+			//Ændring mellem Fremmøde/Fravær
+		}
+		return grid;
+	}
+
+	//////////////////////////////
+	// Back
+	//////////////////////////////
+	
+	private GridPane backButton() {
+		GridPaneCenter grid = new GridPaneCenter();
+
+		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
+		btnBack.setOnAction(e -> {
+			// Previous screen
+		});
+
+		return grid;
+	}
+	
 	//////////////////////////////
 	// Label Title
 	//////////////////////////////
