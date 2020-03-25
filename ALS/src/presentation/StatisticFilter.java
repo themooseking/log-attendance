@@ -1,7 +1,10 @@
 package presentation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import entities.Course;
+import entities.Student;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import logic.CalculateAttendance;
 import logic.DB_Controller;
 
 public class StatisticFilter {
@@ -24,7 +28,8 @@ public class StatisticFilter {
 	private DB_Controller controller = new DB_Controller();
 	private LocalDate startDate = LocalDate.now().minusDays(7);
 	private LocalDate endDate = LocalDate.now();
-	private String selectedCourse;
+	private ArrayList<Course> courseList = controller.getCourseList();
+	private ArrayList<Course> selectedCourseList = new ArrayList<Course>();
 
 	public StatisticFilter(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -46,17 +51,21 @@ public class StatisticFilter {
 
 	private GridPane courseSetup() {
 		GridPaneCenter grid = new GridPaneCenter();
-		ToggleGroup tg = new ToggleGroup();
 
-		for (int i = 0; i < controller.getCourseList().size(); i++) {
-			String courseName = controller.getCourseList().get(i).getCourseName();
+		for (int i = 0; i < courseList.size(); i++) {
+			String courseName = courseList.get(i).getCourseName();
 
-			RadioButtonWithStyle rb = new RadioButtonWithStyle(courseName, tg, grid, 0, i);
-			if (i == 0) {
-				rb.setSelected(true);
-			}
+			RadioButtonWithStyle rb = new RadioButtonWithStyle(courseName, grid, 0, i);
 			rb.setOnAction(e -> {
-				selectedCourse = rb.getText();
+				for (int j = 0; j < courseList.size(); j++) {
+					boolean checker = rb.getText().equals(courseList.get(j).getCourseName());
+					
+					if (checker && rb.isSelected()) {
+						selectedCourseList.add(courseList.get(j));
+					} else if (checker && !rb.isSelected()) {
+						selectedCourseList.remove(courseList.get(j));
+					}
+				}
 			});
 		}
 		return grid;
@@ -118,7 +127,8 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
-			new CourseStatistics(primaryStage, startDate, endDate, selectedCourse).courseStatisticsUI();
+			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
+			new CourseStatistics(primaryStage, selectedData).courseStatisticsUI();
 		});
 
 		return grid;
