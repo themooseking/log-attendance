@@ -46,6 +46,7 @@ public class CourseStatistics {
 
 		BarChart barChart = new BarChart(xAxis, yAxis);
 		barChart.setPrefSize(700, 500);
+		barChart.getStylesheets().add("/presentation/BarChart.css");
 
 		XYChart.Series sys2DataSeries = new XYChart.Series();
 		sys2DataSeries.setName("Systemudvikling2");
