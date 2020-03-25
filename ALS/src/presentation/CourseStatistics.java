@@ -8,11 +8,9 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -27,7 +25,7 @@ public class CourseStatistics {
 	private LocalDate endDate;
 	private String selectedCourse;
 
-	public CourseStatistics(Stage primaryStage, LocalDate startDate, LocalDate endDate, String selectedCourse) {
+	public CourseStatistics(Stage primaryStage, CalculateAttendance selectedData) {
 		this.primaryStage = primaryStage;
 		this.startDate = startDate;
 		this.endDate = endDate;
