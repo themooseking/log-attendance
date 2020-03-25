@@ -3,175 +3,106 @@ package logic;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import entities.Absence;
-import entities.Course;
-import entities.Student;
+import entities.*;
 
 public class CalculateAttendance {
-	//rename/refactor class name til StudentAttendance
-	
 	private DB_Controller controller = new DB_Controller();
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private long daySpan;
-	private ArrayList<Absence> absenceList = controller.getAbsenceList();
-	private ArrayList<Student> studentList = controller.getStudentList();
 	private ArrayList<Course> courseList;
-	private int[] arr = new int[(int) daySpan];
-	
+	private float[] absenceArr;
+
 	public CalculateAttendance(LocalDate sDate, LocalDate eDate, ArrayList<Course> cList) {
 		this.startDate = sDate;
 		this.endDate = eDate;
-		daySpan = ChronoUnit.DAYS.between(startDate, endDate);
-		
+		this.daySpan = ChronoUnit.DAYS.between(startDate, endDate);
+		this.absenceArr = new float[(int) daySpan];
 		this.courseList = cList;
 	}
-	
-	public int[] calcAttendancePerc() {
+
+//	public float calcAttendancePercDay(LocalDate date) {
+//		int absent = 0;
+//
+//		for (int j = 0; j < absenceList.size(); j++) {
+//			if (date.equals(absenceList.get(j).getDate())) {
+//				absent++;
+//			}
+//		}
+//		// System.out.println(((float) absent / studentList.size() * 100));
+//		return (float) absent / studentList.size() * 100;
+//	}
+
+	public float[] studentAttendance() {
+		float[] attendanceArr = new float[(int) daySpan];
+		
+		for (int i = 0; i < absenceArr.length; i++) {
+			attendanceArr[i] = 100 - absenceArr[i];
+		}
+		return attendanceArr;
+	}
+
+	public float[] calculateAbsence() {
+		float totalStudents = (float) totalStudents();
 		int index = 0;
+		
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
-			for (int j = 0; j < absenceList.size(); j++) {
-				if (i.equals(absenceList.get(j).getDate())) {
-					arr[index]++;
-				}
-				index++;
-			}
+			float totalCourses = (float) totalCourseByDate(i);
+			absenceArr[index++] = (float) totalAbsentByDate(i) / totalStudents * 100 / totalCourses;
 		}
-		for (int i = 0; i < arr.length; i++) {
-			arr[i] = arr[i] / studentList.size() * 100;
-		}
-		return arr;
-	}
-
-	public float calcAttendancePercDay(LocalDate date) {
-		int absent = 0;
-
-		for (int j = 0; j < absenceList.size(); j++) {
-			if (date.equals(absenceList.get(j).getDate())) {
-				absent++;
-			}
-		}
-		// System.out.println(((float) absent / studentList.size() * 100));
-		return (float) absent / studentList.size() * 100;
-	}
-
-	public float studentAbsentInCourse(LocalDate date, Course course, Student student) {
-		ArrayList<Absence> studentAbsenceCourseList = controller.getAbsenceByCourse(course);
-
-		int absent = 100;
-		int notAbsent = 0;
-
-		for (int i = 0; i < studentAbsenceCourseList.size(); i++) {
-			if (studentAbsenceCourseList.get(i).getStudent() == student) {
-				for (int j = 0; j < studentAbsenceCourseList.size(); j++) {
-					if (date.equals(studentAbsenceCourseList.get(j).getDate())) {
-						return absent;
-					}
-				}
-			}
-		}
-
-		return notAbsent;
-	}
-	
-	public float studentAttendanceInCourseForDiagram(LocalDate date, Course course, Student student) {
-		return 100 - studentAbsentInCourse(date, course, student);
-	}
-
-	public float studentAbsenceInCourse(LocalDate startD, LocalDate endD, Course course, Student student) {
-		ArrayList<Absence> studentAbsenceCourseList = controller.getAbsenceByCourse(course);
-
-		// startdate og enddate skal nok ikke være i denne klasse, men beholder det for
-		// nu. Det vil sige de her skal slettes når det rettes.
-		startD = startDate;
-		endD = endDate;
 		
-		long daySpan = ChronoUnit.DAYS.between(startD, endD);
-
-		int daysAbsent = 0;
-
-		for (LocalDate i = startD; i.isBefore(endD); i = i.plusDays(1)) {
-			for (int j = 0; j < studentAbsenceCourseList.size(); j++) {
-				if (studentAbsenceCourseList.get(j).getStudent() == student) {
-					for (int k = 0; k < studentAbsenceCourseList.size(); k++) {
-						if (i.equals(studentAbsenceCourseList.get(k).getDate())) {
-							daysAbsent++;
-						}
-					}
-				}
-			}
-		}
-		return (float) daysAbsent / daySpan * 100;
+		return absenceArr;
 	}
 
-	public float studentAttendanceInCourse(LocalDate startD, LocalDate endD, Course course, Student student) {
-		return 100 - studentAbsenceInCourse(startD, endD, course, student);
-	}
-
-	public float studentAbsent(LocalDate date, Student student) {
-		//Hvordan vil vi gerne håndtere fravær ifht om der er to fag eller et på en dag? Eller flere?
-		ArrayList<Absence> studentAbsenceList = controller.getAbsenceList();
-		
-		int absentInCourses = 0;
+	private int totalAbsentByDate(LocalDate date) {
 		int absent = 0;
-
-		for (int i = 0; i < studentAbsenceList.size(); i++) {
-			if (studentAbsenceList.get(i).getStudent() == student) {
-				for (int j = 0; j < studentAbsenceList.size(); j++) {
-					if (date.equals(studentAbsenceList.get(j).getDate())) {
-						absentInCourses++;
-					}
-				}
-			}
-		}
-
-		if(absentInCourses == 1) {
-			absent = 50;
-		}
-		if(absentInCourses == 2) {
-			absent = 100;
+		for (int i = 0; i < courseList.size(); i++) {
+			absent += absentStudents(date, courseList.get(i));
 		}
 		return absent;
 	}
 	
-	public float studentAttendanceForDiagram(LocalDate date, Student student) {
-		return 100 - studentAbsent(date, student);
+	private int totalStudents() {
+		int numberOfStudents = 0;
+		for (int i = 0; i < courseList.size(); i++) {
+			ArrayList<Student> studentCourseList = controller.getStudentsByCourse(courseList.get(i));
+			for (int j = 0; j < studentCourseList.size(); j++) {
+				numberOfStudents++;
+			}
+		}
+		return numberOfStudents;
 	}
 	
-	public float studentAbsence(LocalDate startD, LocalDate endD, Student student) {
-		//tager ikke højde for flere fag på samme dag?! --- så ikke done
+	private int totalCourseByDate(LocalDate date) {
+		int totalCourses = 0;
+		String dayOfWeek = date.getDayOfWeek().name();
+		ArrayList<Timetable> timetableList = controller.getTimeTableList();
 		
-		ArrayList<Absence> studentAbsenceList = controller.getAbsenceList();
-
-		// startdate og enddate skal nok ikke være i denne klasse, men beholder det for
-		// nu. Det vil sige de her skal slettes når det rettes.
-		startD = startDate;
-		endD = endDate;
-		
-		long daySpan = ChronoUnit.DAYS.between(startD, endD);
-
-		int daysAbsent = 0;
-
-		for (LocalDate i = startD; i.isBefore(endD); i = i.plusDays(1)) {
-			for (int j = 0; j < studentAbsenceList.size(); j++) {
-				if (studentAbsenceList.get(j).getStudent() == student) {
-					for (int k = 0; k < studentAbsenceList.size(); k++) {
-						if (i.equals(studentAbsenceList.get(k).getDate())) {
-							daysAbsent++;
-						}
+		for (int i = 0; i < timetableList.size(); i++) {
+			if(dayOfWeek.equals(timetableList.get(i).getPlannedDay())){
+				for (int j = 0; j < courseList.size(); j++) {
+					if(courseList.get(j).getCourseId() == timetableList.get(j).getCourse().getCourseId()) {
+						totalCourses++;
 					}
 				}
 			}
 		}
-		return (float) daysAbsent / daySpan * 100;
+		return totalCourses;
 	}
-	
-	public float studentAttendance(LocalDate startD, LocalDate endD, Student student) {
-		return 100 - studentAbsence(startD, endD, student);
+
+	private int absentStudents(LocalDate date, Course course) {
+		ArrayList<Absence> studentAbsenceCourseList = controller.getAbsenceByCourse(course);
+
+		int studentsAbsent = 0;
+
+		for (int i = 0; i < studentAbsenceCourseList.size(); i++) {
+			if (date.equals(studentAbsenceCourseList.get(i).getDate())) {
+				studentsAbsent++;
+			}
+		}
+		return studentsAbsent;
 	}
-	
-	
-	// de her kan slettes når startDate og endDate fjernes
+
 	public LocalDate getStartDate() {
 		return startDate;
 	}

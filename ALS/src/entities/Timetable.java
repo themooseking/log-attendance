@@ -8,4 +8,12 @@ public class Timetable {
 		this.plannedDay = plannedDay;
 		this.course = course;
 	}
+
+	public String getPlannedDay() {
+		return plannedDay;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
 }
