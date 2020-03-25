@@ -8,7 +8,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -29,7 +28,7 @@ public class CourseStatistics {
 
 	public void courseStatisticsUI() {
 		vbox = new VBoxWithStyle(title(), barDiagram(), attendanceSelector(), backButton());
-		vbox.setAlignment(Pos.CENTER); 
+		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
@@ -45,7 +44,7 @@ public class CourseStatistics {
 		yAxis.setLabel("Absence");
 
 		BarChart barChart = new BarChart(xAxis, yAxis);
-		barChart.setPrefSize(700, 500);
+		barChart.setPrefSize(1500, 600);
 
 		XYChart.Series sys2DataSeries = new XYChart.Series();
 		sys2DataSeries.setName("Systemudvikling2");
@@ -74,11 +73,11 @@ public class CourseStatistics {
 	private GridPane attendanceSelector() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-		RadioButtonWithStyle selector = new RadioButtonWithStyle("", grid, 1, 1);
-//		boolean isSelected = selector.isSelected();
-//		if (isSelected = true) {
-//			//Ændring mellem Fremmøde/Fravær
-//		}
+		RadioButtonWithStyle selector = new RadioButtonWithStyle("Fremmøde", grid, 1, 0);
+		boolean isSelected = selector.isSelected();
+		if (isSelected = true) {
+			//Ændring mellem Fremmøde/Fravær
+		}
 		return grid;
 	}
 
@@ -90,9 +89,9 @@ public class CourseStatistics {
 		GridPaneCenter grid = new GridPaneCenter();
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
-		btnBack.setOnAction(e -> {
-			// Previous screen
-		});
+		btnBack.setOnAction(e ->
+			new StatisticFilter(primaryStage).filterUI()
+		);
 
 		return grid;
 	}
