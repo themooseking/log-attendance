@@ -20,16 +20,11 @@ public class CourseStatistics {
 
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
-	private CalculateAttendance calcAtt = new CalculateAttendance();
-	private LocalDate startDate;
-	private LocalDate endDate;
-	private String selectedCourse;
+	private CalculateAttendance calcAtt;
 
 	public CourseStatistics(Stage primaryStage, CalculateAttendance selectedData) {
 		this.primaryStage = primaryStage;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.selectedCourse = selectedCourse;
+		this.calcAtt = selectedData;
 	}
 
 	public void courseStatisticsUI() {
