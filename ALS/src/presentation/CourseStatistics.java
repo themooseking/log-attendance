@@ -28,7 +28,7 @@ public class CourseStatistics {
 	}
 
 	public void courseStatisticsUI() {
-		vbox = new VBoxWithStyle(title(), barDiagram());
+		vbox = new VBoxWithStyle(title(), barDiagram(), attendanceSelector(), backButton());
 		vbox.setAlignment(Pos.CENTER); 
 
 		Scene scene = new Scene(vbox, 1800, 980);
@@ -73,11 +73,11 @@ public class CourseStatistics {
 	private GridPane attendanceSelector() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-		CheckBox selector = new CheckBox("Attendance");
-		boolean isSelected = selector.isSelected();
-		if (isSelected = true) {
-			//Ændring mellem Fremmøde/Fravær
-		}
+		RadioButtonWithStyle selector = new RadioButtonWithStyle("", grid, 1, 1);
+//		boolean isSelected = selector.isSelected();
+//		if (isSelected = true) {
+//			//Ændring mellem Fremmøde/Fravær
+//		}
 		return grid;
 	}
 
