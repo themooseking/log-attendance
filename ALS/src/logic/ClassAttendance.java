@@ -11,6 +11,7 @@ public class ClassAttendance {
 	private DB_Controller controller = new DB_Controller();
 	private CalculateAttendance studentAttendance = new CalculateAttendance();
 
+	
 	public float classAbsenceInCourse(LocalDate date, Course course) {
 		ArrayList<Student> classList = controller.getStudentsByCourse(course);
 
