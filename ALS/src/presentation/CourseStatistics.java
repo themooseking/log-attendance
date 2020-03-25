@@ -45,6 +45,7 @@ public class CourseStatistics {
 		yAxis.setLabel("Absence");
 
 		BarChart barChart = new BarChart(xAxis, yAxis);
+		barChart.setPrefSize(700, 500);
 
 		XYChart.Series sys2DataSeries = new XYChart.Series();
 		sys2DataSeries.setName("Systemudvikling2");
