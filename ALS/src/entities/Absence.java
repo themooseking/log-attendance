@@ -16,4 +16,13 @@ public class Absence {
 	public LocalDate getDate() {
 		return date;
 	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+	
 }
