@@ -35,7 +35,7 @@ public class CalculateAttendance {
 
 	public float[] studentAttendance() {
 		float[] attendanceArr = new float[(int) daySpan + 1];
-		
+
 		for (int i = 0; i < absenceArr.length; i++) {
 			attendanceArr[i] = 100 - absenceArr[i];
 		}
@@ -54,7 +54,7 @@ public class CalculateAttendance {
 				absenceArr[index++] = 0;
 			}
 		}
-		
+
 		return absenceArr;
 	}
 
@@ -65,30 +65,28 @@ public class CalculateAttendance {
 		}
 		return absent;
 	}
-	
+
 	private int totalStudents() {
 		int numberOfStudents = 0;
-		System.out.println(controller.getStudentsByCourse(courseList.get(0)));
 		for (int i = 0; i < courseList.size(); i++) {
 			ArrayList<Student> studentCourseList = controller.getStudentsByCourse(courseList.get(i));
 			for (int j = 0; j < studentCourseList.size(); j++) {
 				numberOfStudents++;
 			}
 		}
-		System.out.println(numberOfStudents);
 		return numberOfStudents;
 	}
-	
+
 	private int totalCourseByDate(LocalDate date) {
 		int totalCourses = 0;
 		String dayOfWeek = date.getDayOfWeek().name();
 		ArrayList<Timetable> timetableList = controller.getTimeTableList();
-		
+
 		for (int i = 0; i < timetableList.size(); i++) {
 			String timeTableDay = timetableList.get(i).getPlannedDay().toUpperCase();
-			if(dayOfWeek.equals(timeTableDay)){
+			if (dayOfWeek.equals(timeTableDay)) {
 				for (int j = 0; j < courseList.size(); j++) {
-					if(courseList.get(j).getCourseId() == timetableList.get(j).getCourse().getCourseId()) {
+					if (courseList.get(j).getCourseId() == timetableList.get(j).getCourse().getCourseId()) {
 						totalCourses++;
 					}
 				}

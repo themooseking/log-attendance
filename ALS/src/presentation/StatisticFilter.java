@@ -126,7 +126,6 @@ public class StatisticFilter {
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
 			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
-			System.out.println(selectedCourseList.get(0).getCourseName());
 			new CourseStatistics(primaryStage, selectedData).courseStatisticsUI();
 		});
 

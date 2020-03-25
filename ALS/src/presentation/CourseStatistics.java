@@ -54,7 +54,6 @@ public class CourseStatistics {
 		
 		int index = 0;
 		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
-//			System.out.println(arr[index]);
 			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), arr[index++]));
 		}
 
@@ -78,10 +77,10 @@ public class CourseStatistics {
 	private GridPane attendanceSelector() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-		RadioButtonWithStyle selector = new RadioButtonWithStyle("Fremmøde", grid, 1, 0);
+		RadioButtonWithStyle selector = new RadioButtonWithStyle("FremmÃ¸de", grid, 1, 0);
 		boolean isSelected = selector.isSelected();
-		if (isSelected = true) {
-			//Ændring mellem Fremmøde/Fravær
+		if (isSelected) {
+			calcAtt.studentAttendance();
 		}
 		return grid;
 	}
