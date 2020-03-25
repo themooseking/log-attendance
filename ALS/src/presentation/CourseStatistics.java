@@ -2,6 +2,7 @@ package presentation;
 
 import java.time.LocalDate;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -10,6 +11,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -27,7 +29,7 @@ public class CourseStatistics {
 	}
 
 	public void courseStatisticsUI() {
-		vbox = new VBoxWithStyle(title(), barDiagram(), attendanceSelector(), backButton());
+		vbox = new VBoxWithStyle(title(), barDiagram(), attendanceSelector(), bButton());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
@@ -77,7 +79,7 @@ public class CourseStatistics {
 	private GridPane attendanceSelector() {
 		GridPaneCenter grid = new GridPaneCenter();
 		
-		RadioButtonWithStyle selector = new RadioButtonWithStyle("FremmÃ¸de", grid, 1, 0);
+		RadioButtonWithStyle selector = new RadioButtonWithStyle("Fremmøde", grid, 1, 0);
 		boolean isSelected = selector.isSelected();
 		if (isSelected) {
 			calcAtt.studentAttendance();
@@ -88,6 +90,14 @@ public class CourseStatistics {
 	//////////////////////////////
 	// Back
 	//////////////////////////////
+	
+	private HBox bButton() {
+		HBox hbox = new HBox(backButton());
+		hbox.setPadding(new Insets(10, 40, 10, 40));
+		hbox.setAlignment(Pos.CENTER_RIGHT);
+		
+		return hbox;
+	}
 	
 	private GridPane backButton() {
 		GridPaneCenter grid = new GridPaneCenter();
