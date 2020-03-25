@@ -63,10 +63,10 @@ public class DB_Absence {
 		try {
 			String sql = "SELECT * FROM absence WHERE course_id=?";
 			
-			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, course.getCourseId());
 
-			ResultSet resultSet = statement.executeQuery(sql);
+			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
 				Date date = resultSet.getDate("absence_date");

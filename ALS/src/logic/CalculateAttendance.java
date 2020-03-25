@@ -17,7 +17,7 @@ public class CalculateAttendance {
 		this.startDate = sDate;
 		this.endDate = eDate;
 		this.daySpan = ChronoUnit.DAYS.between(startDate, endDate);
-		this.absenceArr = new float[(int) daySpan];
+		this.absenceArr = new float[(int) daySpan + 1];
 		this.courseList = cList;
 	}
 
@@ -34,7 +34,7 @@ public class CalculateAttendance {
 //	}
 
 	public float[] studentAttendance() {
-		float[] attendanceArr = new float[(int) daySpan];
+		float[] attendanceArr = new float[(int) daySpan + 1];
 		
 		for (int i = 0; i < absenceArr.length; i++) {
 			attendanceArr[i] = 100 - absenceArr[i];
@@ -45,10 +45,14 @@ public class CalculateAttendance {
 	public float[] calculateAbsence() {
 		float totalStudents = (float) totalStudents();
 		int index = 0;
-		
+
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
 			float totalCourses = (float) totalCourseByDate(i);
-			absenceArr[index++] = (float) totalAbsentByDate(i) / totalStudents * 100 / totalCourses;
+			if (totalCourses > 0) {
+				absenceArr[index++] = (float) totalAbsentByDate(i) / totalStudents * 100 / totalCourses;
+			} else {
+				absenceArr[index++] = 0;
+			}
 		}
 		
 		return absenceArr;
@@ -64,12 +68,14 @@ public class CalculateAttendance {
 	
 	private int totalStudents() {
 		int numberOfStudents = 0;
+		System.out.println(controller.getStudentsByCourse(courseList.get(0)));
 		for (int i = 0; i < courseList.size(); i++) {
 			ArrayList<Student> studentCourseList = controller.getStudentsByCourse(courseList.get(i));
 			for (int j = 0; j < studentCourseList.size(); j++) {
 				numberOfStudents++;
 			}
 		}
+		System.out.println(numberOfStudents);
 		return numberOfStudents;
 	}
 	
@@ -79,7 +85,8 @@ public class CalculateAttendance {
 		ArrayList<Timetable> timetableList = controller.getTimeTableList();
 		
 		for (int i = 0; i < timetableList.size(); i++) {
-			if(dayOfWeek.equals(timetableList.get(i).getPlannedDay())){
+			String timeTableDay = timetableList.get(i).getPlannedDay().toUpperCase();
+			if(dayOfWeek.equals(timeTableDay)){
 				for (int j = 0; j < courseList.size(); j++) {
 					if(courseList.get(j).getCourseId() == timetableList.get(j).getCourse().getCourseId()) {
 						totalCourses++;

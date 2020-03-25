@@ -49,12 +49,13 @@ public class DB_Student {
 		try {
 			String sql = "SELECT * FROM student WHERE semester_no=?";
 			
-			PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, course.getSemesterNo());
 
-			ResultSet resultSet = statement.executeQuery(sql);
-
+			ResultSet resultSet = statement.executeQuery();
+			
 			while (resultSet.next()) {
+				
 				int studentId = resultSet.getInt("id");
 				String firstName = resultSet.getString("firstname");
 				String lastName = resultSet.getString("lastname");

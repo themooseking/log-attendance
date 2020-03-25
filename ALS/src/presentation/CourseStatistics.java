@@ -50,8 +50,12 @@ public class CourseStatistics {
 		XYChart.Series sys2DataSeries = new XYChart.Series();
 		sys2DataSeries.setName("Systemudvikling2");
 
+		float[] arr = calcAtt.calculateAbsence();
+		
+		int index = 0;
 		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
-			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), calcAtt.calcAttendancePercDay(i)));
+//			System.out.println(arr[index]);
+			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), arr[index++]));
 		}
 
 //        sys2DataSeries.getData().add(new XYChart.Data("Monday", 10));
