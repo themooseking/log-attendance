@@ -10,14 +10,23 @@ import entities.Student;
 public class CalculateAttendance {
 	//rename/refactor class name til StudentAttendance
 	
-	private LocalDate startDate = LocalDate.parse("2020-03-01");
-	private LocalDate endDate = LocalDate.parse("2020-03-18");
-	private long daySpan = ChronoUnit.DAYS.between(startDate, endDate);
 	private DB_Controller controller = new DB_Controller();
+	private LocalDate startDate;
+	private LocalDate endDate;
+	private long daySpan;
 	private ArrayList<Absence> absenceList = controller.getAbsenceList();
 	private ArrayList<Student> studentList = controller.getStudentList();
+	private ArrayList<Course> courseList;
 	private int[] arr = new int[(int) daySpan];
-
+	
+	public CalculateAttendance(LocalDate sDate, LocalDate eDate, ArrayList<Course> cList) {
+		this.startDate = sDate;
+		this.endDate = eDate;
+		daySpan = ChronoUnit.DAYS.between(startDate, endDate);
+		
+		this.courseList = cList;
+	}
+	
 	public int[] calcAttendancePerc() {
 		int index = 0;
 		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
