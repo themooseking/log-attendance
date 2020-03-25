@@ -48,7 +48,7 @@ public class CourseStatistics {
 		barChart.getStylesheets().add("/presentation/BarChart.css");
 
 		XYChart.Series sys2DataSeries = new XYChart.Series();
-		sys2DataSeries.setName("Systemudvikling2");
+		sys2DataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
 
 		float[] arr = calcAtt.calculateAbsence();
 		

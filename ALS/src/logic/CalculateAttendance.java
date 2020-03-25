@@ -116,4 +116,8 @@ public class CalculateAttendance {
 		return endDate;
 	}
 
+	public ArrayList<Course> getCourseList() {
+		return courseList;
+	}
+
 }
