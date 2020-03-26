@@ -12,6 +12,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -115,8 +116,9 @@ public class CourseStatistics {
 	//////////////////////////////
 
 	private Label title() {
-		Label label = new Label("2 Semester stats :)");
+		Label label = new Label("Data");
 		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
 
