@@ -28,7 +28,7 @@ public class TextFieldWithStyle extends TextField {
 		grid.getChildren().add(this);
 	}
 	
-	public void enterEffect(TextField obj) {
+	private void enterEffect(TextField obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#707070"), new CornerRadii(10), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
@@ -37,7 +37,7 @@ public class TextFieldWithStyle extends TextField {
 		obj.setCursor(Cursor.HAND);
 	}
 	
-	public void defaultEffect(TextField obj) {
+	private void defaultEffect(TextField obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#FFFFFF"), new CornerRadii(10), Insets.EMPTY);
 		Background background = new Background(background_fill);
 		

@@ -19,12 +19,12 @@ public class DatePickerWithStyle extends DatePicker {
 		grid.getChildren().add(this);
 	}
 	
-	public void enterEffect(DatePicker obj) {
+	private void enterEffect(DatePicker obj) {
 		obj.setCursor(Cursor.HAND);
 
 	}
 
-	public void defaultEffect(DatePicker obj) {
+	private void defaultEffect(DatePicker obj) {
 		obj.setCursor(Cursor.DEFAULT);
 
 	}

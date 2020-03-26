@@ -2,7 +2,6 @@ package presentation;
 
 import javafx.scene.Cursor;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -14,7 +13,7 @@ public class RadioButtonWithStyle extends RadioButton {
 		super.setText(radioButtonText);
 		super.setFont(Font.font("Calibri", FontWeight.BOLD, 30));
 		super.getStylesheets().add("/presentation/RadioButton.css");
-		super.setPrefSize(200, 120);
+		super.setPrefSize(200, 60);
 
 		defaultEffect(this);
 
@@ -25,13 +24,13 @@ public class RadioButtonWithStyle extends RadioButton {
 		grid.getChildren().add(this);
 	}
 	
-	public void enterEffect(RadioButton obj) {
+	private void enterEffect(RadioButton obj) {
 		obj.setCursor(Cursor.HAND);
 		
 		obj.setTextFill(Color.web("#118ABB"));
 	}
 
-	public void defaultEffect(RadioButton obj) {
+	private void defaultEffect(RadioButton obj) {
 		obj.setCursor(Cursor.DEFAULT);
 
 		obj.setTextFill(Color.web("#F9F9F9"));

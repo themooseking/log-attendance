@@ -27,7 +27,7 @@ public class ButtonWithStyle extends Button {
 		grid.getChildren().add(this);
 	}
 	
-	public void enterEffect(Button obj) {
+	private void enterEffect(Button obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#118ABB"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
@@ -37,7 +37,7 @@ public class ButtonWithStyle extends Button {
 		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 
-	public void defaultEffect(Button obj) {
+	private void defaultEffect(Button obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#3D3D3D"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
