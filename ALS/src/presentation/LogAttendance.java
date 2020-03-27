@@ -24,12 +24,13 @@ public class LogAttendance {
 	private VBoxWithStyle vbox;
 	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
-	private Course selectedCourse = new Course(1, "Sys2", 1, 1);
+	private Course selectedCourse;
 	private ArrayList<Student> studentList = controller.getStudentsByCourse(selectedCourse);
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
-	public LogAttendance(Stage primaryStage) {
+	public LogAttendance(Stage primaryStage, Course selectedCourse) {
 		this.primaryStage = primaryStage;
+		this.selectedCourse = new Course(1, "Sys2", 1, 1);
 		sortStudentList();
 	}
 
