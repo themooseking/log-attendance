@@ -1,8 +1,8 @@
 package data;
 
-import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.sql.*;
 import entities.*;
 
 public class DB_Absence {
@@ -11,6 +11,28 @@ public class DB_Absence {
 	public DB_Absence(Connection connection) {
 			this.connection = connection;
 		}
+	
+	/***********************************
+	 * CREATE
+	 ***********************************/
+	
+	public void createAbsence(Absence absence) {
+		try {
+			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
+
+			PreparedStatement statement = connection.prepareStatement(sql);	//, Statement.RETURN_GENERATED_KEYS);
+			statement.setDate(1, Date.valueOf(absence.getDate()));
+			statement.setInt(2, absence.getStudent().getStudentId());
+			statement.setInt(3, absence.getCourse().getCourseId());
+			statement.executeUpdate();
+
+//			ResultSet resultSet = statement.getGeneratedKeys();
+//			resultSet.next();
+//			student.setId(resultSet.getInt(1));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/***********************************
 	 * READ
