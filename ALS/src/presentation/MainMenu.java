@@ -17,7 +17,7 @@ public class MainMenu {
 	private int Educator;
 	private String Lesson1;
 	private String Lesson2;
-
+ 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
