@@ -1,5 +1,6 @@
 package presentation;
 
+import entities.Educator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,9 +15,15 @@ import javafx.stage.Stage;
 public class MainMenu {
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
-	private int Educator;
-	private String Lesson1;
-	private String Lesson2;  
+	private Educator educator;
+//	private int Educator;
+//	private String Lesson1;
+//	private String Lesson2;  
+	
+	public MainMenu(Stage primaryStage, Educator educator) {
+		this.primaryStage = primaryStage;
+		this.educator = educator;
+	}
 	
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -123,7 +130,7 @@ public class MainMenu {
 		loButton.setMinSize(300, 150);
 		
 		loButton.setOnAction(e -> {
-		//Logout	
+			new LoginScreen(primaryStage).loginUI();
 		});
 		
 		return grid;

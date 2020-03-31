@@ -1,15 +1,10 @@
 package presentation;
 
-import javafx.geometry.Insets;
+import entities.Educator;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
@@ -18,6 +13,7 @@ public class LoginScreen {
 
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
+	private Educator educator = new Educator(0, "Hans Iversen");
 
 	public LoginScreen(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -38,7 +34,7 @@ public class LoginScreen {
 		
 		ButtonWithStyle btnLogin = new ButtonWithStyle("Login", grid, 0, 1);
 		btnLogin.setOnAction(e -> {
-			
+			new MainMenu(primaryStage, educator).mainMenuUI();
 		});
 		
 		return grid;

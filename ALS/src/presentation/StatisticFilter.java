@@ -196,7 +196,7 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			// Previous screen
+			new MainMenu(primaryStage).mainMenuUI();
 		});
 
 		return grid;
