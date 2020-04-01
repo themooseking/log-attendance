@@ -42,6 +42,10 @@ public class DB_Controller {
 	public ArrayList<Course> getCourseList() {
 		return courseDB.getCourses();
 	}
+	
+	public ArrayList<Course> getCoursesByEduId(int id) {
+		return courseDB.getCoursesByEducatorId(id);
+	}
 
 	public ArrayList<Student> getStudentList() {
 		return studentDB.getAllStudents();

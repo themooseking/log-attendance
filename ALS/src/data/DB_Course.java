@@ -41,4 +41,33 @@ public class DB_Course {
 
 		return courseList;
 	}
+	
+	public ArrayList<Course> getCoursesByEducatorId(int id) {
+		ArrayList<Course> courseList = new ArrayList<>();
+
+		
+		try {
+			String sql = "SELECT * FROM course WHERE educator_id=?";
+			
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, id);
+
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next()) {
+				int courseId = resultSet.getInt("id");
+				String courseName = resultSet.getString("course_name");
+				int semesterNo = resultSet.getInt("semester_no");
+				int educatorId = id;
+
+				Course course = new Course(courseId, courseName, semesterNo, educatorId);
+
+				courseList.add(course);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return courseList;
+	}
 }
