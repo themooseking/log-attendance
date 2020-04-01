@@ -22,7 +22,7 @@ import logic.DB_Controller;
 
 public class StatisticFilter {
 
-	private Stage primaryStage;
+	private Stage secondaryStage;
 	private VBoxWithStyle vbox;
 	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
@@ -30,13 +30,12 @@ public class StatisticFilter {
 	private LocalDate endDate = LocalDate.now();
 	private ArrayList<Course> courseList = controller.getCourseList();
 	private ArrayList<Course> selectedCourseList = new ArrayList<Course>();
-	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, 1)); // Har brug
-																											// for
+	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, 1)); // Har brug																									// for
 																											// getStudentsByCourseList
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
 	public StatisticFilter(Stage primaryStage) {
-		this.primaryStage = primaryStage;
+		this.secondaryStage = new Stage();
 		sortStudentList();
 	}
 
@@ -111,6 +110,7 @@ public class StatisticFilter {
 			String studentName = studentList.get(i).getFirstName() + " " + studentList.get(i).getLastName();
 
 			RadioButtonWithStyle rb = new RadioButtonWithStyle(studentName, grid, 0, i);
+			rb.setSelected(true);
 			rb.setPrefWidth(500);
 			rb.setPadding(new Insets(0, 0, 0, 20));
 			rb.setOnAction(e -> {
@@ -185,7 +185,7 @@ public class StatisticFilter {
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
 			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
-			new CourseStatistics(primaryStage, selectedData).courseStatisticsUI();
+			new CourseStatistics(secondaryStage, selectedData).courseStatisticsUI();
 		});
 
 		return grid;
@@ -196,7 +196,8 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			new MainMenu(primaryStage).mainMenuUI();
+//			new MainMenu(secondaryStage).mainMenuUI();
+			secondaryStage.close();
 		});
 
 		return grid;
@@ -218,9 +219,9 @@ public class StatisticFilter {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		primaryStage.setTitle("ALS");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		secondaryStage.setTitle("ALS");
+		secondaryStage.setScene(scene);
+		secondaryStage.show();
 	}
 	
 	//////////////////////////////

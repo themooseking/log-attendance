@@ -54,7 +54,7 @@ public class CourseStatistics {
 		sys2DataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
 
 		float[] arr = calcAtt.calculateAbsence();
-		
+
 		int index = 0;
 		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
 			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), arr[index++]));
@@ -72,14 +72,14 @@ public class CourseStatistics {
 
 		return grid;
 	}
-	
+
 	//////////////////////////////
 	// Selector
 	//////////////////////////////
 
 	private GridPane attendanceSelector() {
 		GridPaneCenter grid = new GridPaneCenter();
-		
+
 		RadioButtonWithStyle selector = new RadioButtonWithStyle("Fremmøde", grid, 1, 0);
 		boolean isSelected = selector.isSelected();
 		if (isSelected) {
@@ -91,26 +91,27 @@ public class CourseStatistics {
 	//////////////////////////////
 	// Back
 	//////////////////////////////
-	
+
 	private HBox bButton() {
 		HBox hbox = new HBox(backButton());
 		hbox.setPadding(new Insets(10, 40, 10, 40));
 		hbox.setAlignment(Pos.CENTER_RIGHT);
-		
+
 		return hbox;
 	}
-	
+
 	private GridPane backButton() {
 		GridPaneCenter grid = new GridPaneCenter();
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
-		btnBack.setOnAction(e ->
-			new StatisticFilter(primaryStage).filterUI()
-		);
+		btnBack.setOnAction(e -> {
+			primaryStage.close();
+			new StatisticFilter(primaryStage).filterUI();
+		});
 
 		return grid;
 	}
-	
+
 	//////////////////////////////
 	// Label Title
 	//////////////////////////////

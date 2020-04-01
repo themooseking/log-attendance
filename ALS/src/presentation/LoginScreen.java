@@ -13,7 +13,7 @@ public class LoginScreen {
 
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
-	private Educator educator = new Educator(0, "Hans Iversen");
+	private Educator educator = new Educator(1, "Hans Iversen");
 
 	public LoginScreen(Stage primaryStage) {
 		this.primaryStage = primaryStage;

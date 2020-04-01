@@ -20,17 +20,18 @@ import logic.RegisterAbsence;
 
 public class LogAttendance {
 
-	private Stage primaryStage;
+	private Stage secondaryStage;
 	private VBoxWithStyle vbox;
 	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
 	private Course selectedCourse;
-	private ArrayList<Student> studentList = controller.getStudentsByCourse(selectedCourse);
+	private ArrayList<Student> studentList;
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
-	public LogAttendance(Stage primaryStage, Course selectedCourse) {
-		this.primaryStage = primaryStage;
-		this.selectedCourse = new Course(1, "Sys2", 1, 1);
+	public LogAttendance(Course selectedCourse) {
+		secondaryStage = new Stage();
+		this.selectedCourse = selectedCourse;
+		studentList = controller.getStudentsByCourse(selectedCourse);
 		sortStudentList();
 	}
 
@@ -96,7 +97,7 @@ public class LogAttendance {
 		ButtonWithStyle btnLog = new ButtonWithStyle("Log", grid, 0, 0);
 		btnLog.setOnAction(e -> {
 			new RegisterAbsence(selectedStudentList, selectedCourse);
-			new MainMenu(primaryStage);
+			secondaryStage.close();
 		});
 
 		return grid;
@@ -108,7 +109,7 @@ public class LogAttendance {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			new MainMenu(primaryStage);
+			secondaryStage.close();
 		});
 
 		return grid;
@@ -119,7 +120,7 @@ public class LogAttendance {
 	//////////////////////////////
 
 	private Label title() {
-		Label label = new Label("Log Attendance");
+		Label label = new Label("Log Attendance for " + selectedCourse.getCourseName());
 		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
@@ -130,9 +131,9 @@ public class LogAttendance {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		primaryStage.setTitle("ALS");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+		secondaryStage.setTitle("ALS");
+		secondaryStage.setScene(scene);
+		secondaryStage.show();
 	}
 
 	//////////////////////////////

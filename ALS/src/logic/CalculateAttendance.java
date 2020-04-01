@@ -86,7 +86,6 @@ public class CalculateAttendance {
 			String timeTableDay = timetableList.get(i).getPlannedDay().toUpperCase();
 			if (dayOfWeek.equals(timeTableDay)) {
 				for (int j = 0; j < courseList.size(); j++) {
-					System.out.println(courseList.get(j).getCourseId() + " " + timetableList.get(i).getCourse().getCourseId());
 					if (courseList.get(j).getCourseId() == timetableList.get(i).getCourse().getCourseId()) {
 						totalCourses++;
 					}
