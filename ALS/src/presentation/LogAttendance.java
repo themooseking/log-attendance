@@ -20,7 +20,7 @@ import logic.RegisterAbsence;
 
 public class LogAttendance {
 
-	private Stage secondaryStage;
+	private Stage primaryStage;
 	private VBoxWithStyle vbox;
 	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
@@ -28,8 +28,8 @@ public class LogAttendance {
 	private ArrayList<Student> studentList;
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
-	public LogAttendance(Course selectedCourse) {
-		secondaryStage = new Stage();
+	public LogAttendance(Stage primaryStage, Course selectedCourse) {
+		this.primaryStage = primaryStage;
 		this.selectedCourse = selectedCourse;
 		studentList = controller.getStudentsByCourse(selectedCourse);
 		sortStudentList();
@@ -96,9 +96,8 @@ public class LogAttendance {
 
 		ButtonWithStyle btnLog = new ButtonWithStyle("Log", grid, 0, 0);
 		btnLog.setOnAction(e -> {
-			RegisterAbsence log = new RegisterAbsence(selectedStudentList, selectedCourse);
-			log.logAbsence();
-			secondaryStage.close();
+			new RegisterAbsence(selectedStudentList, selectedCourse).logAbsence();
+			new MainMenu(primaryStage).mainMenuUI();
 		});
 
 		return grid;
@@ -110,7 +109,7 @@ public class LogAttendance {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			secondaryStage.close();
+			new MainMenu(primaryStage).mainMenuUI();
 		});
 
 		return grid;
@@ -121,7 +120,7 @@ public class LogAttendance {
 	//////////////////////////////
 
 	private Label title() {
-		Label label = new Label("Log Attendance for " + selectedCourse.getCourseName());
+		Label label = new Label("Log Absence for " + selectedCourse.getCourseName());
 		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
@@ -132,9 +131,9 @@ public class LogAttendance {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		secondaryStage.setTitle("ALS");
-		secondaryStage.setScene(scene);
-		secondaryStage.show();
+		primaryStage.setTitle("ALS");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 
 	//////////////////////////////

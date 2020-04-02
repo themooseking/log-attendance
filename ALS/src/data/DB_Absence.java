@@ -21,6 +21,7 @@ public class DB_Absence {
 			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
+			
 			statement.setDate(1, Date.valueOf(absence.getDate()));
 			statement.setInt(2, absence.getStudent().getStudentId());
 			statement.setInt(3, absence.getCourse().getCourseId());

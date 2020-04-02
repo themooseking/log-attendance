@@ -11,8 +11,7 @@ public class RegisterAbsence {
 	private ArrayList<Student> selectedStudentList;
 	private Course selectedCourse;
 	private LocalDate today = LocalDate.now();
-	private DB_Controller controller = new DB_Controller();
-	
+	private DB_Controller controller = new DB_Controller();	
 	
 	public RegisterAbsence(ArrayList<Student> selectedStudentList, Course selectedCourse) {
 		this.selectedStudentList = selectedStudentList;

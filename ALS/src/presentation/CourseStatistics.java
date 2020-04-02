@@ -26,7 +26,7 @@ public class CourseStatistics {
 	private boolean diagramSwitch;
 
 	public CourseStatistics(Stage primaryStage, CalculateAttendance selectedData) {
-		this.primaryStage = new Stage();
+		this.primaryStage = primaryStage;
 		this.calcAtt = selectedData;
 	}
 
@@ -134,6 +134,10 @@ public class CourseStatistics {
 	//////////////////////////////
 	// Back
 	//////////////////////////////
+	
+//////////////////////////////
+// KIG HER
+//////////////////////////////
 
 	private HBox bButton() {
 		HBox hbox = new HBox(backButton());
@@ -148,7 +152,7 @@ public class CourseStatistics {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			primaryStage.close();
+			new StatisticFilter(primaryStage).filterUI();
 		});
 
 		return grid;

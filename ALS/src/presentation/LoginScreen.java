@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import logic.LoggedInST;
 
 public class LoginScreen {
 
@@ -34,7 +35,8 @@ public class LoginScreen {
 		
 		ButtonWithStyle btnLogin = new ButtonWithStyle("Login", grid, 0, 1);
 		btnLogin.setOnAction(e -> {
-			new MainMenu(primaryStage, educator).mainMenuUI();
+			LoggedInST.setUser(educator);
+			new MainMenu(primaryStage).mainMenuUI();
 		});
 		
 		return grid;

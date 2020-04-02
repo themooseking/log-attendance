@@ -16,21 +16,20 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import logic.DB_Controller;
+import logic.LoggedInST;
 
 public class MainMenu {
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
-	private Educator educator;
 	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Course> courseList;
 //	private int Educator;
 //	private String Lesson1;
 //	private String Lesson2;  
 
-	public MainMenu(Stage primaryStage, Educator educator) {
+	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.educator = educator;
-		courseList = controller.getCoursesByEduId(educator.getEducatorId());
+		courseList = controller.getCoursesByEduId(LoggedInST.getUser().getEducatorId());
 	}
 
 	public void mainMenuUI() {
@@ -64,7 +63,7 @@ public class MainMenu {
 			ButtonWithStyle btn = new ButtonWithStyle(courseName, grid, 0, i);
 
 			btn.setOnAction(e -> {
-				LogAttendance logAttendance = new LogAttendance(course);
+				LogAttendance logAttendance = new LogAttendance(primaryStage, course);
 				logAttendance.logAttendanceUI();
 			});
 		}
@@ -80,7 +79,7 @@ public class MainMenu {
 		atdButton.setMinSize(300, 150);
 
 		atdButton.setOnAction(e -> {
-			new StatisticFilter(primaryStage, educator).filterUI();
+			new StatisticFilter(primaryStage).filterUI();
 		});
 
 		return grid;

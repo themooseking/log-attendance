@@ -21,18 +21,6 @@ public class CalculateAttendance {
 		this.courseList = cList;
 	}
 
-//	public float calcAttendancePercDay(LocalDate date) {
-//		int absent = 0;
-//
-//		for (int j = 0; j < absenceList.size(); j++) {
-//			if (date.equals(absenceList.get(j).getDate())) {
-//				absent++;
-//			}
-//		}
-//		// System.out.println(((float) absent / studentList.size() * 100));
-//		return (float) absent / studentList.size() * 100;
-//	}
-
 	public float[] studentAttendance() {
 		float[] attendanceArr = new float[(int) daySpan + 1];
 
@@ -46,7 +34,7 @@ public class CalculateAttendance {
 		float totalStudents = (float) totalStudents();
 		int index = 0;
 
-		for (LocalDate i = startDate; i.isBefore(endDate); i = i.plusDays(1)) {
+		for (LocalDate i = startDate; i.isBefore(endDate.plusDays(1)); i = i.plusDays(1)) {
 			float totalCourses = (float) totalCourseByDate(i);
 			if (totalCourses > 0) {
 				absenceArr[index++] = (float) totalAbsentByDate(i) / totalStudents * 100 / totalCourses;

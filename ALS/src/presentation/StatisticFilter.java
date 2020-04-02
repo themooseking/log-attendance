@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import entities.Course;
-import entities.Educator;
 import entities.Student;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,6 +19,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import logic.CalculateAttendance;
 import logic.DB_Controller;
+import logic.LoggedInST;
 
 public class StatisticFilter {
 
@@ -29,16 +29,14 @@ public class StatisticFilter {
 	private DB_Controller controller = new DB_Controller();
 	private LocalDate startDate = LocalDate.now().minusDays(7);
 	private LocalDate endDate = LocalDate.now();
-	private Educator educator;
 	private ArrayList<Course> courseList = controller.getCourseList();
 	private ArrayList<Course> selectedCourseList = new ArrayList<Course>();
-	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, educator)); // Har brug																									// for
+	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, LoggedInST.getUser())); // Har brug																									// for
 																											// getStudentsByCourseList
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
-	public StatisticFilter(Stage primaryStage, Educator educator) {
+	public StatisticFilter(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.educator = educator;
 		sortStudentList();
 	}
 
@@ -199,7 +197,7 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-			new MainMenu(primaryStage, educator).mainMenuUI();
+			new MainMenu(primaryStage).mainMenuUI();
 		});
 
 		return grid;
