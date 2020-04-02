@@ -8,17 +8,26 @@ public class DB_Controller {
 	private DataLayer dataLayer = new DataLayer();
 	private DB_Absence absenceDB = new DB_Absence(dataLayer.getConnection());
 	private DB_Course courseDB = new DB_Course(dataLayer.getConnection());
+	private DB_Educator educatorDB = new DB_Educator(dataLayer.getConnection());
 	private DB_Student studentDB = new DB_Student(dataLayer.getConnection());
 	private DB_TimeTable timeTableDB = new DB_TimeTable(dataLayer.getConnection());
 
 	/***********************************
-	 * READ
+	 * Create
 	 ***********************************/
 
 	public void createAbsence(ArrayList<Absence> absenceList) {
 		for (Absence ab : absenceList) {
 			absenceDB.createAbsence(ab);
 		}
+	}
+
+	public void createCourse(Course course) {
+		courseDB.createCourse(course);
+	}
+
+	public void createStudent(Student student) {
+		studentDB.createStudent(student);
 	}
 
 	/***********************************
@@ -39,11 +48,19 @@ public class DB_Controller {
 	}
 
 	public ArrayList<Course> getCourseList() {
-		return courseDB.getCourses();
+		ArrayList<Educator> educatorList = getEducatorList();
+
+		return courseDB.getCourses(educatorList);
 	}
 
 	public ArrayList<Course> getCoursesByEduId(int id) {
-		return courseDB.getCoursesByEducatorId(id);
+		ArrayList<Educator> educatorList = getEducatorList();
+
+		return courseDB.getCoursesByEducatorId(educatorList, id);
+	}
+
+	public ArrayList<Educator> getEducatorList() {
+		return educatorDB.getAllEducators();
 	}
 
 	public ArrayList<Student> getStudentList() {
@@ -58,5 +75,17 @@ public class DB_Controller {
 		ArrayList<Course> courseList = getCourseList();
 
 		return timeTableDB.getTimeTable(courseList);
+	}
+	
+	/***********************************
+	 * DELETE
+	 ***********************************/
+	
+	public void deleteCourse(Course course) {
+		courseDB.deleteCourse(course);
+	}
+	
+	public void deleteStudent(Student student) {
+		studentDB.deleteStudent(student);
 	}
 }

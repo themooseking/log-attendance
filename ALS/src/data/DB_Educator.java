@@ -15,10 +15,9 @@ public class DB_Educator {
 	 * READ
 	 ***********************************/
 	
-	public ArrayList<Educator> getAllEducators(int id) {
+	public ArrayList<Educator> getAllEducators() {
 		ArrayList<Educator> educatorList = new ArrayList<>();
 
-		
 		try {
 			String sql = "SELECT * FROM educator";
 			

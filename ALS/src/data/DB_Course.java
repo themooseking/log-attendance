@@ -15,26 +15,26 @@ public class DB_Course {
 	 * CREATE
 	 ***********************************/
 
-//	public void createCourse(Course course) {
-//		try {
-//			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
-//
-//			PreparedStatement statement = connection.prepareStatement(sql);
-//			statement.setString(1, course.getCourseName());
-//			statement.setInt(2, course.getSemesterNo());
-//			statement.setInt(3, course.getEducator().getEducatorName());
-//			statement.executeUpdate();
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public void createCourse(Course course) {
+		try {
+			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, course.getCourseName());
+			statement.setInt(2, course.getSemesterNo());
+			statement.setInt(3, course.getEducator().getEducatorId());
+			statement.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/***********************************
 	 * READ
 	 ***********************************/
 
-	public ArrayList<Course> getCourses() {
+	public ArrayList<Course> getCourses(ArrayList<Educator> educatorList) {
 		ArrayList<Course> courseList = new ArrayList<>();
 
 		try {
@@ -47,9 +47,16 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				int educatorId = resultSet.getInt("educator_id");
+				
+				Educator educator = null;
+				for (int i = 0; i < educatorList.size(); i++) {
+					if (educatorList.get(i).getEducatorId() == resultSet.getInt("educator_id")) {
+						educator = educatorList.get(i);
+						break;
+					}
+				}
 
-				Course course = new Course(courseId, courseName, semesterNo, educatorId);
+				Course course = new Course(courseId, courseName, semesterNo, educator);
 
 				courseList.add(course);
 			}
@@ -60,7 +67,7 @@ public class DB_Course {
 		return courseList;
 	}
 
-	public ArrayList<Course> getCoursesByEducatorId(int id) {
+	public ArrayList<Course> getCoursesByEducatorId(ArrayList<Educator> educatorList, int id) {
 		ArrayList<Course> courseList = new ArrayList<>();
 
 		try {
@@ -75,9 +82,16 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				int educatorId = id;
+				
+				Educator educator = null;
+				for (int i = 0; i < educatorList.size(); i++) {
+					if (educatorList.get(i).getEducatorId() == id) {
+						educator = educatorList.get(i);
+						break;
+					}
+				}
 
-				Course course = new Course(courseId, courseName, semesterNo, educatorId);
+				Course course = new Course(courseId, courseName, semesterNo, educator);
 
 				courseList.add(course);
 			}

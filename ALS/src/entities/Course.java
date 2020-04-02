@@ -4,13 +4,13 @@ public class Course {
 	private int courseId;
 	private String courseName;
 	private int semesterNo;
-	private int educatorId;
+	private Educator educator;
 	
-	public Course(int courseId, String courseName, int semesterNo, int educatorId) {
+	public Course(int courseId, String courseName, int semesterNo, Educator educator) {
 		this.courseId = courseId;
 		this.courseName = courseName;
 		this.semesterNo = semesterNo;
-		this.educatorId = educatorId;
+		this.educator = educator;
 	}
 
 	public int getCourseId() {
@@ -23,5 +23,9 @@ public class Course {
 	
 	public int getSemesterNo() {
 		return semesterNo;
+	}
+	
+	public Educator getEducator() {
+		return educator;
 	}
 }
