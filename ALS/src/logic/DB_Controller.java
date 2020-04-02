@@ -70,6 +70,17 @@ public class DB_Controller {
 	public ArrayList<Student> getStudentsByCourse(Course course) {
 		return studentDB.getStudentsByCourse(course);
 	}
+	
+	public ArrayList<Student> getStudentsByCourseList(ArrayList<Course> courseList) {
+		ArrayList<Student> totalStudentList = new ArrayList<Student>();
+		
+		for(Course course : courseList) {
+			ArrayList<Student> studentList = studentDB.getStudentsByCourse(course);
+			totalStudentList.addAll(studentList);
+		}
+		
+		return totalStudentList;
+	}
 
 	public ArrayList<Timetable> getTimeTableList() {
 		ArrayList<Course> courseList = getCourseList();
