@@ -15,20 +15,17 @@ public class DB_Absence {
 	/***********************************
 	 * CREATE
 	 ***********************************/
-	
+
 	public void createAbsence(Absence absence) {
 		try {
 			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
 
-			PreparedStatement statement = connection.prepareStatement(sql);	//, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setDate(1, Date.valueOf(absence.getDate()));
 			statement.setInt(2, absence.getStudent().getStudentId());
 			statement.setInt(3, absence.getCourse().getCourseId());
 			statement.executeUpdate();
 
-//			ResultSet resultSet = statement.getGeneratedKeys();
-//			resultSet.next();
-//			student.setId(resultSet.getInt(1));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -45,7 +42,6 @@ public class DB_Absence {
 			String sql = "SELECT * FROM absence";
 
 			Statement statement = connection.createStatement();
-
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {

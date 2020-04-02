@@ -22,7 +22,6 @@ public class DB_TimeTable {
 				String sql = "SELECT * FROM timetable";
 
 				Statement statement = connection.createStatement();
-
 				ResultSet resultSet = statement.executeQuery(sql);
 
 				while (resultSet.next()) {

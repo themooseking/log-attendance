@@ -27,6 +27,10 @@ public class Student {
 		return lastName;
 	}
 	
+	public int getSemesterNo() {
+		return semesterNo;
+	}
+	
     public static Comparator<Student> StuNameComparator = new Comparator<Student>() {
 
 	public int compare(Student s1, Student s2) {

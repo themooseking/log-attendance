@@ -12,6 +12,25 @@ public class DB_Course {
 	}
 
 	/***********************************
+	 * CREATE
+	 ***********************************/
+
+//	public void createCourse(Course course) {
+//		try {
+//			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
+//
+//			PreparedStatement statement = connection.prepareStatement(sql);
+//			statement.setString(1, course.getCourseName());
+//			statement.setInt(2, course.getSemesterNo());
+//			statement.setInt(3, course.getEducator().getEducatorName());
+//			statement.executeUpdate();
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//	}
+
+	/***********************************
 	 * READ
 	 ***********************************/
 
@@ -22,7 +41,6 @@ public class DB_Course {
 			String sql = "SELECT * FROM course";
 
 			Statement statement = connection.createStatement();
-
 			ResultSet resultSet = statement.executeQuery(sql);
 
 			while (resultSet.next()) {
@@ -41,14 +59,13 @@ public class DB_Course {
 
 		return courseList;
 	}
-	
+
 	public ArrayList<Course> getCoursesByEducatorId(int id) {
 		ArrayList<Course> courseList = new ArrayList<>();
 
-		
 		try {
 			String sql = "SELECT * FROM course WHERE educator_id=?";
-			
+
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 
@@ -69,5 +86,24 @@ public class DB_Course {
 		}
 
 		return courseList;
+	}
+
+	/***********************************
+	 * DELETE
+	 ***********************************/
+
+	public void deleteCourse(Course course) {
+		try {
+			String sql = "DELETE FROM course WHERE id=?";
+
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, course.getCourseId());
+
+			if (statement.executeUpdate() == 0) {
+				System.out.println("No course to be deleted!");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
