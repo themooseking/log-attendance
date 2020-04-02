@@ -17,8 +17,6 @@ public class RegisterAbsence {
 	public RegisterAbsence(ArrayList<Student> selectedStudentList, Course selectedCourse) {
 		this.selectedStudentList = selectedStudentList;
 		this.selectedCourse = selectedCourse;
-		logAbsence();
-		//controller.createAbsence(studentAbsenceList());
 	}
 
 

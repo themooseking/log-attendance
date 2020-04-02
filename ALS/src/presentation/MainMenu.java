@@ -20,7 +20,7 @@ import logic.DB_Controller;
 public class MainMenu {
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
-	private static Educator educator;
+	private Educator educator;
 	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Course> courseList;
 //	private int Educator;
@@ -31,10 +31,6 @@ public class MainMenu {
 		this.primaryStage = primaryStage;
 		this.educator = educator;
 		courseList = controller.getCoursesByEduId(educator.getEducatorId());
-	}
-
-	public MainMenu(Stage primaryStage) {
-		this.primaryStage = primaryStage;
 	}
 
 	public void mainMenuUI() {
@@ -83,7 +79,9 @@ public class MainMenu {
 		ButtonWithStyle atdButton = new ButtonWithStyle("Attendance", grid, 1, 0);
 		atdButton.setMinSize(300, 150);
 
-		atdButton.setOnAction(e -> new StatisticFilter(primaryStage).filterUI());
+		atdButton.setOnAction(e -> {
+			new StatisticFilter(primaryStage, educator).filterUI();
+		});
 
 		return grid;
 	}

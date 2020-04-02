@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import entities.Course;
+import entities.Educator;
 import entities.Student;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,20 +23,22 @@ import logic.DB_Controller;
 
 public class StatisticFilter {
 
-	private Stage secondaryStage;
+	private Stage primaryStage;
 	private VBoxWithStyle vbox;
 	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
 	private LocalDate startDate = LocalDate.now().minusDays(7);
 	private LocalDate endDate = LocalDate.now();
+	private Educator educator;
 	private ArrayList<Course> courseList = controller.getCourseList();
 	private ArrayList<Course> selectedCourseList = new ArrayList<Course>();
-	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, 1)); // Har brug																									// for
+	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, educator)); // Har brug																									// for
 																											// getStudentsByCourseList
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
-	public StatisticFilter(Stage primaryStage) {
-		this.secondaryStage = new Stage();
+	public StatisticFilter(Stage primaryStage, Educator educator) {
+		this.primaryStage = primaryStage;
+		this.educator = educator;
 		sortStudentList();
 	}
 
@@ -185,7 +188,7 @@ public class StatisticFilter {
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
 			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
-			new CourseStatistics(secondaryStage, selectedData).courseStatisticsUI();
+			new CourseStatistics(primaryStage, selectedData).courseStatisticsUI();
 		});
 
 		return grid;
@@ -196,8 +199,7 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
-//			new MainMenu(secondaryStage).mainMenuUI();
-			secondaryStage.close();
+			new MainMenu(primaryStage, educator).mainMenuUI();
 		});
 
 		return grid;
@@ -219,9 +221,9 @@ public class StatisticFilter {
 	//////////////////////////////
 
 	private void sceneSetup(Scene scene) {
-		secondaryStage.setTitle("ALS");
-		secondaryStage.setScene(scene);
-		secondaryStage.show();
+		primaryStage.setTitle("ALS");
+		primaryStage.setScene(scene);
+		primaryStage.show();
 	}
 	
 	//////////////////////////////

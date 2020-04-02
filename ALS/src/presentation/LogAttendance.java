@@ -96,7 +96,8 @@ public class LogAttendance {
 
 		ButtonWithStyle btnLog = new ButtonWithStyle("Log", grid, 0, 0);
 		btnLog.setOnAction(e -> {
-			new RegisterAbsence(selectedStudentList, selectedCourse);
+			RegisterAbsence log = new RegisterAbsence(selectedStudentList, selectedCourse);
+			log.logAbsence();
 			secondaryStage.close();
 		});
 
