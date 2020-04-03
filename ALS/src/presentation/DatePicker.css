@@ -4,6 +4,7 @@
 	-fx-border-width: 0;
 	-fx-background-insets: 0;
 }
+
 .date-picker > .text-field {
 	-fx-font-size: 25;
 	-fx-font-weight: bold;
