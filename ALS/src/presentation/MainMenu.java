@@ -46,9 +46,10 @@ public class MainMenu {
 
 	private HBox gridSetup() {
 		VBox vboxLeft = new VBox(courseButtons());
-		VBox vboxRight = new VBox(attendanceButton(), logoutButton());
+		VBox vboxMiddle = new VBox(attendanceButton(), logoutButton());
+		VBox vboxRight = new VBox(studentButton(), courseButton());
 
-		HBox hbox = new HBox(vboxLeft, vboxRight);
+		HBox hbox = new HBox(vboxLeft, vboxMiddle, vboxRight);
 		hbox.setAlignment(Pos.CENTER);
 
 		return hbox;
@@ -96,6 +97,34 @@ public class MainMenu {
 			new LoginScreen(primaryStage).loginUI();
 		});
 
+		return grid;
+	}
+	
+	private GridPane studentButton() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10 ,50));
+		
+		ButtonWithStyle stButton = new ButtonWithStyle("Edit Students", grid, 1, 0);
+		stButton.setMinSize(300, 150);
+		
+		stButton.setOnAction(e -> {
+			//Student
+		});
+		
+		return grid;
+	}
+	
+	private GridPane courseButton() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10 ,50));
+		
+		ButtonWithStyle coButton = new ButtonWithStyle("Edit Courses", grid, 1, 0);
+		coButton.setMinSize(300, 150);
+		
+		coButton.setOnAction(e -> {
+			//Course
+		});
+		
 		return grid;
 	}
 
