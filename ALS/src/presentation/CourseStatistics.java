@@ -1,14 +1,16 @@
 package presentation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import entities.Course;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,14 +26,17 @@ public class CourseStatistics {
 	private VBoxWithStyle vbox;
 	private CalculateAttendance calcAtt;
 	private boolean diagramSwitch;
+	private ArrayList<Course> selectedCourseList;
 
-	public CourseStatistics(Stage primaryStage, CalculateAttendance selectedData) {
+	public CourseStatistics(Stage primaryStage, CalculateAttendance selectedData,
+			ArrayList<Course> selectedCourseList) {
 		this.primaryStage = primaryStage;
 		this.calcAtt = selectedData;
+		this.selectedCourseList = selectedCourseList;
 	}
 
 	public void courseStatisticsUI() {
-		vbox = new VBoxWithStyle(title(), barDiagram(), lineChart(), attendanceSwitch(), bButton());
+		vbox = new VBoxWithStyle(title(), barDiagram(), attendanceSwitch(), bButton());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
@@ -70,38 +75,14 @@ public class CourseStatistics {
 
 		BarChartWithStyle<String, Number> barChart = new BarChartWithStyle<String, Number>(grid, 0, 0,
 				averageXAxisData(), averageYAxisData());
-		
-		barChart.getData().add(barChart.prepareData(calcAtt, diagramSwitch));
 
-		return grid;
-	}
+		LineChartWithStyle<String, Number> lineChart = new LineChartWithStyle<String, Number>(grid, 0, 0,
+				averageXAxisData(), averageYAxisData());
 
-	private GridPane lineChart() {
-		GridPaneCenter grid = new GridPaneCenter();
-
-		LineChart barChart = new LineChart(averageXAxisData(), averageYAxisData());
-		barChart.setPrefSize(1500, 600);
-		barChart.getStylesheets().add("/presentation/BarChart.css");
-
-		XYChart.Series sys2DataSeries = new XYChart.Series();
-		sys2DataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
-
-		float[] arr;
-
-		if (!diagramSwitch) {
-			arr = calcAtt.calculateAbsence();
-		} else {
-			arr = calcAtt.studentAttendance();
-		}
-
-		int index = 0;
-		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
-			sys2DataSeries.getData().add(new XYChart.Data(i.toString(), arr[index++]));
-		}
-
-		barChart.getData().add(sys2DataSeries);
-
-		grid.getChildren().add(barChart);
+		ArrayList<Series<String, Number>> dataSeriesArr = barChart.prepareData(calcAtt, diagramSwitch,
+				selectedCourseList);
+		barChart.getData().addAll(dataSeriesArr);
+		lineChart.getData().add(lineChart.prepareAverageData(calcAtt, diagramSwitch));
 
 		return grid;
 	}
@@ -134,7 +115,7 @@ public class CourseStatistics {
 	//////////////////////////////
 	// Back
 	//////////////////////////////
-	
+
 //////////////////////////////
 // KIG HER
 //////////////////////////////

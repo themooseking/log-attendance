@@ -31,8 +31,9 @@ public class StatisticFilter {
 	private LocalDate endDate = LocalDate.now();
 	private ArrayList<Course> courseList = controller.getCourseList();
 	private ArrayList<Course> selectedCourseList = new ArrayList<Course>();
-	private ArrayList<Student> studentList = controller.getStudentsByCourse(new Course(1, "Sys1", 1, LoggedInST.getUser())); // Har brug																									// for
-																											// getStudentsByCourseList
+	private ArrayList<Student> studentList = controller
+			.getStudentsByCourse(new Course(1, "Sys1", 1, LoggedInST.getUser())); // Har brug // for
+	// getStudentsByCourseList
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 
 	public StatisticFilter(Stage primaryStage) {
@@ -51,7 +52,7 @@ public class StatisticFilter {
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
-		sceneSetup(scene);
+		sceneSetup(scene); 
 	}
 
 	//////////////////////////////
@@ -99,7 +100,7 @@ public class StatisticFilter {
 
 		ScrollPaneWithStyle sp = new ScrollPaneWithStyle(grid, 0, 0);
 		sp.setPrefWidth(550);
-		sp.setContent(studentSetup()); 
+		sp.setContent(studentSetup());
 
 		return grid;
 	}
@@ -116,7 +117,8 @@ public class StatisticFilter {
 			rb.setPadding(new Insets(0, 0, 0, 20));
 			rb.setOnAction(e -> {
 				for (int j = 0; j < studentList.size(); j++) {
-					boolean checker = rb.getText().equals(studentList.get(j).getFirstName() + " " + studentList.get(j).getLastName());
+					boolean checker = rb.getText()
+							.equals(studentList.get(j).getFirstName() + " " + studentList.get(j).getLastName());
 
 					if (checker && rb.isSelected()) {
 						selectedStudentList.add(studentList.get(j));
@@ -186,7 +188,7 @@ public class StatisticFilter {
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
 			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
-			new CourseStatistics(primaryStage, selectedData).courseStatisticsUI();
+			new CourseStatistics(primaryStage, selectedData, selectedCourseList).courseStatisticsUI();
 		});
 
 		return grid;
@@ -223,7 +225,7 @@ public class StatisticFilter {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-	
+
 	//////////////////////////////
 	// Sort List
 	//////////////////////////////

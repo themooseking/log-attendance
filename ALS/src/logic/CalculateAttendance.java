@@ -19,6 +19,34 @@ public class CalculateAttendance {
 		this.daySpan = ChronoUnit.DAYS.between(startDate, endDate);
 		this.absenceArr = new float[(int) daySpan + 1];
 		this.courseList = cList;
+	}	
+	
+	public float[] calculateCourseAttendance(int i) {
+		float totalStudents = (float) totalStudents();
+		int index = 0;
+
+		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
+			absenceArr[index++] = 100 - ((float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100);
+		}
+		return absenceArr;
+	}
+
+	public float[] calculateCourseAbsence(int i) {
+		float totalStudents = (float) totalStudents();
+		int index = 0;
+
+		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
+			absenceArr[index++] = (float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100;
+		}
+		return absenceArr;
+	}
+
+	private int totalAbsentByDateAndCourse(LocalDate date, int i) {
+		int absent = 0;
+		
+		absent += absentStudents(date, courseList.get(i));
+		
+		return absent;
 	}
 
 	public float[] studentAttendance() {
@@ -42,7 +70,7 @@ public class CalculateAttendance {
 				absenceArr[index++] = 0;
 			}
 		}
-		
+
 		return absenceArr;
 	}
 
@@ -62,7 +90,7 @@ public class CalculateAttendance {
 				numberOfStudents++;
 			}
 		}
-		return numberOfStudents;
+		return numberOfStudents / courseList.size();
 	}
 
 	private int totalCourseByDate(LocalDate date) {

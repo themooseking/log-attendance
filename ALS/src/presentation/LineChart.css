@@ -1,0 +1,25 @@
+.chart-plot-background {
+-fx-background-color: transparent;
+}
+.default-color0.chart-series-line {
+-fx-stroke: blue;
+} 
+.default-color0.chart-line-symbol { 
+    -fx-background-color: blue, white;
+}
+.chart-content {
+	-fx-font-size: 28;
+}
+
+.axis {
+	-fx-tick-label-fill: #F9F9F9;	
+}
+
+.axis-label {
+	-fx-text-fill: #F9F9F9;
+}
+
+.chart-legend{
+	-fx-translate-y: 20;
+}
+

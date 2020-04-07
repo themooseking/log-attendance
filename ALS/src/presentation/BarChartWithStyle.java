@@ -1,7 +1,9 @@
 package presentation;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import entities.Course;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
@@ -12,6 +14,8 @@ public class BarChartWithStyle<X, Y> extends BarChart<X, Y> {
 
 	public BarChartWithStyle(GridPane grid, int col, int row, Axis x, Axis y) {
 		super(x, y);
+		super.setLegendVisible(true);
+		super.setAnimated(false);
 		super.getStylesheets().add("/presentation/BarChart.css");
 		super.setPrefSize(1500, 600);
 
@@ -19,25 +23,32 @@ public class BarChartWithStyle<X, Y> extends BarChart<X, Y> {
 		grid.getChildren().add(this);
 	}
 	
-	public Series<String, Number> prepareData(CalculateAttendance calcAtt, boolean diagramSwitch) {
-		XYChart.Series<String, Number> dataSeries = new XYChart.Series<String, Number>();
-//		dataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
-		dataSeries.setName("Average");
+	public ArrayList<Series<String, Number>> prepareData(CalculateAttendance calcAtt, boolean diagramSwitch, ArrayList<Course> selectedCourseList) {
+		
+		ArrayList<XYChart.Series<String, Number>> dataSeriesArr = new ArrayList<XYChart.Series<String,Number>>();
 		
 		float[] arr;
 
-		if (!diagramSwitch) {
-			arr = calcAtt.calculateAbsence();
-		} else {
-			arr = calcAtt.studentAttendance();
-		}
-		
-		int index = 0;
-		for (LocalDate i = calcAtt.getStartDate(); i.isBefore(calcAtt.getEndDate().plusDays(1)); i = i.plusDays(1)) {
-			dataSeries.getData().add(new XYChart.Data<String, Number>(i.toString(), arr[index++]));
-		}
-		
-		return dataSeries;
+
+		for (int i = 0; i < selectedCourseList.size(); i++) {
+			int index = 0;
+
+			if (!diagramSwitch) {
+				arr = calcAtt.calculateCourseAbsence(i);
+			} else {
+				arr = calcAtt.calculateCourseAttendance(i);
+			}
+
+			XYChart.Series<String, Number> dataSeries = new XYChart.Series<String, Number>();
+			dataSeries.setName(selectedCourseList.get(i).getCourseName());
+
+			for (LocalDate ii = calcAtt.getStartDate(); ii
+					.isBefore(calcAtt.getEndDate().plusDays(1)); ii = ii.plusDays(1)) {
+				dataSeries.getData().add(new XYChart.Data<String, Number>(ii.toString(), arr[index++]));
+			}
+			dataSeriesArr.add(dataSeries);
+		}		
+		return dataSeriesArr;
 	}
 	
 }
