@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import logic.DB_Controller;
 import logic.LoggedInST;
 
 
@@ -18,10 +19,12 @@ public class LoginScreen {
 
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
+	private DB_Controller controller = new DB_Controller();
 	private Educator educator = new Educator(1, "Hans Iversen");
 
 	public LoginScreen(Stage primaryStage) {
-		this.primaryStage = primaryStage; 
+		this.primaryStage = primaryStage;
+		
 	}
 
 	public void loginUI() {
