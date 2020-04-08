@@ -89,7 +89,7 @@ public class DB_Student {
 
 		return studentList;
 	}
-	
+
 	public ArrayList<Student> getStudentsBySemester(int semesterNo) {
 		ArrayList<Student> studentList = new ArrayList<>();
 

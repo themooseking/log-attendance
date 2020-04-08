@@ -9,9 +9,9 @@ public class DB_Absence {
 	private Connection connection;
 
 	public DB_Absence(Connection connection) {
-			this.connection = connection;
-		}
-	
+		this.connection = connection;
+	}
+
 	/***********************************
 	 * CREATE
 	 ***********************************/
@@ -21,7 +21,7 @@ public class DB_Absence {
 			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
-			
+
 			statement.setDate(1, Date.valueOf(absence.getDate()));
 			statement.setInt(2, absence.getStudent().getStudentId());
 			statement.setInt(3, absence.getCourse().getCourseId());
@@ -48,7 +48,7 @@ public class DB_Absence {
 			while (resultSet.next()) {
 				Date date = resultSet.getDate("absence_date");
 				LocalDate localDate = date.toLocalDate();
-				
+
 				Student student = null;
 				for (int i = 0; i < studentList.size(); i++) {
 					if (studentList.get(i).getStudentId() == resultSet.getInt("student_id")) {
@@ -56,7 +56,7 @@ public class DB_Absence {
 						break;
 					}
 				}
-				
+
 				Course course = null;
 				for (int i = 0; i < courseList.size(); i++) {
 					if (courseList.get(i).getCourseId() == resultSet.getInt("course_id")) {
@@ -75,13 +75,13 @@ public class DB_Absence {
 
 		return absenceList;
 	}
-	
+
 	public ArrayList<Absence> getAbsenceByCourse(ArrayList<Student> studentList, Course course) {
 		ArrayList<Absence> absenceList = new ArrayList<>();
 
 		try {
 			String sql = "SELECT * FROM absence WHERE course_id=?";
-			
+
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setInt(1, course.getCourseId());
 
@@ -90,7 +90,7 @@ public class DB_Absence {
 			while (resultSet.next()) {
 				Date date = resultSet.getDate("absence_date");
 				LocalDate localDate = date.toLocalDate();
-				
+
 				Student student = null;
 				for (int i = 0; i < studentList.size(); i++) {
 					if (studentList.get(i).getStudentId() == resultSet.getInt("student_id")) {

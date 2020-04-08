@@ -8,19 +8,19 @@ public class DB_Educator {
 	private Connection connection;
 
 	public DB_Educator(Connection connection) {
-			this.connection = connection;
-		}
+		this.connection = connection;
+	}
 
 	/***********************************
 	 * READ
 	 ***********************************/
-	
+
 	public ArrayList<Educator> getAllEducators() {
 		ArrayList<Educator> educatorList = new ArrayList<>();
 
 		try {
 			String sql = "SELECT * FROM educator";
-			
+
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(sql);
 

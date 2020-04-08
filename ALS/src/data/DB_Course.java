@@ -47,7 +47,7 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				
+
 				Educator educator = null;
 				for (int i = 0; i < educatorList.size(); i++) {
 					if (educatorList.get(i).getEducatorId() == resultSet.getInt("educator_id")) {
@@ -82,7 +82,7 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				
+
 				Educator educator = null;
 				for (int i = 0; i < educatorList.size(); i++) {
 					if (educatorList.get(i).getEducatorId() == id) {
