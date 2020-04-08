@@ -16,4 +16,9 @@ public class Educator {
 	public String getEducatorName() {
 		return educatorName;
 	}
+	
+	@Override
+	public String toString() {		
+		return educatorName;		
+	}
 }

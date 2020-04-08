@@ -23,9 +23,6 @@ public class MainMenu {
 	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Course> courseList;
-//	private int Educator;
-//	private String Lesson1;
-//	private String Lesson2;  
 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
