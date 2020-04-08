@@ -81,10 +81,6 @@ public class DB_Controller {
 		
 		return totalStudentList;
 	}
-	
-	public ArrayList<Student> getStudentsBySemesterNo(int semesterNo){
-		return studentDB.getStudentsBySemester(semesterNo);
-	}
 
 	public ArrayList<Timetable> getTimeTableList() {
 		ArrayList<Course> courseList = getCourseList();

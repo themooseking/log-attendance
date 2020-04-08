@@ -1,9 +1,9 @@
 package entities;
 
 public class Educator {
-	private int educatorId;
+	private int educatorId;	
 	private String educatorName;
-
+	
 	public Educator(int educatorId, String educatorName) {
 		this.educatorId = educatorId;
 		this.educatorName = educatorName;

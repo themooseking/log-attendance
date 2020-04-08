@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DataLayer {
 	private String databaseName;
-	private Connection connection;
+	private Connection connection; 
 
 	public DataLayer() {
 		databaseName = "ALSDB";
@@ -14,10 +14,14 @@ public class DataLayer {
 		loadJdbcDriver();
 		openConnection(databaseName);
 	}
-
+	
 	private boolean loadJdbcDriver() {
 		try {
+//			System.out.println("Loading JDBC driver...");
+
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+//			System.out.println("JDBC driver loaded");
 
 			return true;
 		} catch (ClassNotFoundException e) {
@@ -32,7 +36,12 @@ public class DataLayer {
 					+ databaseName + ";" + "integratedSecurity=true;";
 
 			connection = null;
+
+//			System.out.println("Connecting to database...");
+
 			connection = DriverManager.getConnection(connectionString);
+
+//			System.out.println("Connected to database");
 
 			return true;
 		} catch (SQLException e) {
@@ -42,7 +51,7 @@ public class DataLayer {
 			return false;
 		}
 	}
-
+	
 	/***********************************
 	 * GETTERS
 	 ***********************************/

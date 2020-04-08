@@ -90,34 +90,6 @@ public class DB_Student {
 		return studentList;
 	}
 
-	public ArrayList<Student> getStudentsBySemester(int semesterNo) {
-		ArrayList<Student> studentList = new ArrayList<>();
-
-		try {
-			String sql = "SELECT * FROM student WHERE semester_no=?";
-
-			PreparedStatement statement = connection.prepareStatement(sql);
-			statement.setInt(1, semesterNo);
-
-			ResultSet resultSet = statement.executeQuery();
-
-			while (resultSet.next()) {
-
-				int studentId = resultSet.getInt("id");
-				String firstName = resultSet.getString("firstname");
-				String lastName = resultSet.getString("lastname");
-
-				Student student = new Student(studentId, firstName, lastName, semesterNo);
-
-				studentList.add(student);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return studentList;
-	}
-
 	/***********************************
 	 * DELETE
 	 ***********************************/

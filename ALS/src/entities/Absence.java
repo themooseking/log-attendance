@@ -6,7 +6,7 @@ public class Absence {
 	private LocalDate date;
 	private Student student;
 	private Course course;
-
+	
 	public Absence(LocalDate date, Student student, Course course) {
 		this.date = date;
 		this.student = student;
@@ -24,4 +24,5 @@ public class Absence {
 	public Course getCourse() {
 		return course;
 	}
+	
 }
