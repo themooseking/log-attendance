@@ -24,7 +24,7 @@ public class ComboBoxWithStyle extends ComboBox<Object> {
 		super.onMouseExitedProperty().set(e -> defaultEffect(this));
 		
 		GridPane.setConstraints(grid, row, col);
-		grid.getChildren().add(this);
+		grid.getChildren().add(this); 
 	}
 
 	
