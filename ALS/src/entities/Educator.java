@@ -18,7 +18,7 @@ public class Educator {
 	}
 	
 	@Override
-	public String toString() {		
+	public String toString() {
 		return educatorName;		
 	}
 }

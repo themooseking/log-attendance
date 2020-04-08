@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import entities.Educator;
 import javafx.collections.FXCollections;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -38,6 +39,7 @@ public class LoginScreen {
 
 	private GridPane selectEducator() {
 		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(30));
 
 		selectedEducator = new ComboBoxWithStyle(FXCollections.observableArrayList(educatorList), grid, 0, 0);
 		if (LoggedInST.getUser() == null) {
