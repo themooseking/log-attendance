@@ -1,5 +1,6 @@
 package presentation;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entities.Course;
@@ -24,10 +25,12 @@ public class MainMenu {
 	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Course> courseList;
+	private ArrayList<Timetable> timetableList;
 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		courseList = controller.getCoursesByEduId(LoggedInST.getUser().getEducatorId());
+		timetableList = controller.getTimeTableList();
 	}
 
 	public void mainMenuUI() {
@@ -60,17 +63,22 @@ public class MainMenu {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
 		grid.setVgap(20);
+		int i = 0;
 		
-		for (int i = 0; i < courseList.size(); i++) {
-			Course course = courseList.get(i);
-			String courseName = course.getCourseName();
-			ButtonWithStyle btn = new ButtonWithStyle(courseName, grid, 0, i);
-			btn.setMinSize(300, 150);
+		for (Timetable t : timetableList) {
+			if (LocalDate.now().getDayOfWeek().name().equals(t.getPlannedDay().toUpperCase())) {
+				if (t.getCourse().getEducator().getEducatorId() == LoggedInST.getUser().getEducatorId()) {
+					Course course = t.getCourse();
+					String courseName = course.getCourseName();
+					ButtonWithStyle btn = new ButtonWithStyle(courseName, grid, 0, i++);
+					btn.setMinSize(300, 150);
 
-			btn.setOnAction(e -> {
-				LogAttendance logAttendance = new LogAttendance(primaryStage, course);
-				logAttendance.logAttendanceUI();
-			});
+					btn.setOnAction(e -> {
+						LogAttendance logAttendance = new LogAttendance(primaryStage, course);
+						logAttendance.logAttendanceUI();
+					});
+				}
+			}
 		}
 
 		return grid;
