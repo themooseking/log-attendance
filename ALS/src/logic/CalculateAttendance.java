@@ -21,14 +21,14 @@ public class CalculateAttendance {
 		this.absenceArr = new float[(int) daySpan + 1];
 		this.courseList = cList;
 		this.studentList = sList;
-	}	
-	
+	}
+
 	public float[] calculateCourseAttendance(int i) {
 		float totalStudents = (float) studentList.size();
 		int index = 0;
 
 		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
-			absenceArr[index++] = 100 - ((float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100);
+			absenceArr[index++] = 100 - ((float) absentStudents(ii, courseList.get(i)) / totalStudents * 100);
 		}
 		return absenceArr;
 	}
@@ -38,19 +38,11 @@ public class CalculateAttendance {
 		int index = 0;
 
 		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
-			absenceArr[index++] = (float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100;
+			absenceArr[index++] = (float) absentStudents(ii, courseList.get(i)) / totalStudents * 100;
 		}
 		return absenceArr;
 	}
 
-	private int totalAbsentByDateAndCourse(LocalDate date, int i) {
-		int absent = 0;
-		
-		absent += absentStudents(date, courseList.get(i));
-		
-		return absent;
-	}
-	
 //	public void averageAbsence() {
 //		float[] absenceArr = new float[(int) daySpan + 1];
 //		
@@ -127,8 +119,11 @@ public class CalculateAttendance {
 		int studentsAbsent = 0;
 
 		for (int i = 0; i < studentAbsenceCourseList.size(); i++) {
-			if (date.equals(studentAbsenceCourseList.get(i).getDate())) {
-				studentsAbsent++;
+			for (int j = 0; j < studentList.size(); j++) {
+				if (date.equals(studentAbsenceCourseList.get(i).getDate()) && studentList.get(j)
+						.getStudentId() == studentAbsenceCourseList.get(i).getStudent().getStudentId()) {
+					studentsAbsent++;
+				}
 			}
 		}
 		return studentsAbsent;
