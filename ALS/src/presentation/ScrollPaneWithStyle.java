@@ -29,9 +29,4 @@ public class ScrollPaneWithStyle extends ScrollPane {
 		obj.setPannable(false);
 
 	}
-
-	public void setContent(TextArea textArea) {
-		this.setContent(textArea);
-	}
-
 }
