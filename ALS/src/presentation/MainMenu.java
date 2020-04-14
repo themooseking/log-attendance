@@ -111,7 +111,7 @@ public class MainMenu {
 
 		return grid;
 	}
-	
+
 	private GridPane studentButton() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 50));
@@ -120,7 +120,7 @@ public class MainMenu {
 		stButton.setMinSize(300, 150);
 		
 		stButton.setOnAction(e -> {
-			//Student
+			new AddStudent(primaryStage).editStudentUI();
 		});
 		
 		return grid;

@@ -1,5 +1,7 @@
 package presentation;
 
+import java.awt.TextArea;
+
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 
@@ -26,6 +28,10 @@ public class ScrollPaneWithStyle extends ScrollPane {
 	private void defaultEffect(ScrollPane obj) {
 		obj.setPannable(false);
 
+	}
+
+	public void setContent(TextArea textArea) {
+		this.setContent(textArea);
 	}
 
 }
