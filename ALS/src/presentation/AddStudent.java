@@ -45,7 +45,7 @@ public class AddStudent {
 		createStudentVBox.setAlignment(Pos.TOP_CENTER);
 		VBox deleteStudentVBox = new VBox(deleteTitle(), selectSemesterNoDelete(), /*selectStudent(),*/ studentDeleteButton());
 		deleteStudentVBox.setAlignment(Pos.TOP_CENTER);
-		VBox scrollPaneHistoryVBox = new VBox(/* scrollpane */);
+		VBox scrollPaneHistoryVBox = new VBox(scrollPaneHistory());
 
 		HBox studentBoxesAndScrollPane = new HBox(createStudentVBox, deleteStudentVBox, scrollPaneHistoryVBox);
 		studentBoxesAndScrollPane.setAlignment(Pos.CENTER);
@@ -123,7 +123,7 @@ public class AddStudent {
 			Student newStudent = new Student(tfFirstName.getText(), tfLastName.getText(), slcSemesterCreate.getValue());
 
 			controller.createStudent(newStudent);
-			setScrollPaneContet(newStudent + " has been added.");
+			//setScrollPaneContet(newStudent + " has been added.");
 
 			System.out.println("create knap trykket");
 			// bekræftelse
