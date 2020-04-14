@@ -70,15 +70,30 @@ public class DB_Controller {
 	public ArrayList<Student> getStudentsByCourse(Course course) {
 		return studentDB.getStudentsByCourse(course);
 	}
-	
+
 	public ArrayList<Student> getStudentsByCourseList(ArrayList<Course> courseList) {
 		ArrayList<Student> totalStudentList = new ArrayList<Student>();
+		ArrayList<Course> checkedList = new ArrayList<Course>();
+		int i = -1;
 		
-		for(Course course : courseList) {
-			ArrayList<Student> studentList = studentDB.getStudentsByCourse(course);
-			totalStudentList.addAll(studentList);
+		try {
+			for (Course course : courseList) {
+				for (; i < checkedList.size(); i++) {
+					if (checkedList.size() == 0 || checkedList.get(i).getSemesterNo() != course.getSemesterNo()) {
+						ArrayList<Student> studentList = studentDB.getStudentsByCourse(course);
+						totalStudentList.addAll(studentList);
+						break;
+					} else {
+						continue;
+					}
+				}
+				i = 0;
+				checkedList.add(course);
+			}
+		} catch (Exception e) {
+			System.out.println("Can't create studentList (DB_Controller.getStudentsByCourseList)");
 		}
-		
+
 		return totalStudentList;
 	}
 
@@ -87,15 +102,15 @@ public class DB_Controller {
 
 		return timeTableDB.getTimeTable(courseList);
 	}
-	
+
 	/***********************************
 	 * DELETE
 	 ***********************************/
-	
+
 	public void deleteCourse(Course course) {
 		courseDB.deleteCourse(course);
 	}
-	
+
 	public void deleteStudent(Student student) {
 		studentDB.deleteStudent(student);
 	}

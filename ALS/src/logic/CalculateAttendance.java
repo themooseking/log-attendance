@@ -21,36 +21,28 @@ public class CalculateAttendance {
 		this.absenceArr = new float[(int) daySpan + 1];
 		this.courseList = cList;
 		this.studentList = sList;
-	}	
-	
+	}
+
 	public float[] calculateCourseAttendance(int i) {
-		float totalStudents = (float) totalStudents();
+		float totalStudents = (float) studentList.size();
 		int index = 0;
 
 		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
-			absenceArr[index++] = 100 - ((float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100);
+			absenceArr[index++] = 100 - ((float) absentStudents(ii, courseList.get(i)) / totalStudents * 100);
 		}
 		return absenceArr;
 	}
 
 	public float[] calculateCourseAbsence(int i) {
-		float totalStudents = (float) totalStudents();
+		float totalStudents = (float) studentList.size();
 		int index = 0;
 
 		for (LocalDate ii = startDate; ii.isBefore(endDate.plusDays(1)); ii = ii.plusDays(1)) {
-			absenceArr[index++] = (float) totalAbsentByDateAndCourse(ii, i) / totalStudents * 100;
+			absenceArr[index++] = (float) absentStudents(ii, courseList.get(i)) / totalStudents * 100;
 		}
 		return absenceArr;
 	}
 
-	private int totalAbsentByDateAndCourse(LocalDate date, int i) {
-		int absent = 0;
-		
-		absent += absentStudents(date, courseList.get(i));
-		
-		return absent;
-	}
-	
 //	public void averageAbsence() {
 //		float[] absenceArr = new float[(int) daySpan + 1];
 //		
@@ -69,7 +61,7 @@ public class CalculateAttendance {
 	}
 
 	public float[] calculateAbsence() {
-		float totalStudents = (float) totalStudents();
+		float totalStudents = (float) studentList.size();
 		int index = 0;
 
 		for (LocalDate i = startDate; i.isBefore(endDate.plusDays(1)); i = i.plusDays(1)) {
@@ -92,16 +84,16 @@ public class CalculateAttendance {
 		return absent;
 	}
 
-	private int totalStudents() {
-		int numberOfStudents = 0;
-		for (int i = 0; i < courseList.size(); i++) {
-			ArrayList<Student> studentCourseList = controller.getStudentsByCourse(courseList.get(i));
-			for (int j = 0; j < studentCourseList.size(); j++) {
-				numberOfStudents++;
-			}
-		}
-		return numberOfStudents / courseList.size();
-	}
+//	private int totalStudents() {
+//		int numberOfStudents = 0;
+//		for (int i = 0; i < courseList.size(); i++) {
+//			ArrayList<Student> studentCourseList = controller.getStudentsByCourse(courseList.get(i));
+//			for (int j = 0; j < studentCourseList.size(); j++) {
+//				numberOfStudents++;
+//			}
+//		}
+//		return numberOfStudents / courseList.size();
+//	}
 
 	private int totalCourseByDate(LocalDate date) {
 		int totalCourses = 0;
@@ -127,8 +119,11 @@ public class CalculateAttendance {
 		int studentsAbsent = 0;
 
 		for (int i = 0; i < studentAbsenceCourseList.size(); i++) {
-			if (date.equals(studentAbsenceCourseList.get(i).getDate())) {
-				studentsAbsent++;
+			for (int j = 0; j < studentList.size(); j++) {
+				if (date.equals(studentAbsenceCourseList.get(i).getDate()) && studentList.get(j)
+						.getStudentId() == studentAbsenceCourseList.get(i).getStudent().getStudentId()) {
+					studentsAbsent++;
+				}
 			}
 		}
 		return studentsAbsent;
