@@ -187,7 +187,7 @@ public class StatisticFilter {
 
 		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
 		btnFetch.setOnAction(e -> {
-			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList);
+			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList, null); // Indsæt studentList
 			new CourseStatistics(primaryStage, selectedData, selectedCourseList).courseStatisticsUI();
 		});
 
