@@ -66,6 +66,10 @@ public class DB_Controller {
 	public ArrayList<Student> getStudentList() {
 		return studentDB.getAllStudents();
 	}
+	
+	public ArrayList<Student> getStudentsBySemesterNo(int semesterNo){
+        return studentDB.getStudentsBySemester(semesterNo);
+    }
 
 	public ArrayList<Student> getStudentsByCourse(Course course) {
 		return studentDB.getStudentsByCourse(course);

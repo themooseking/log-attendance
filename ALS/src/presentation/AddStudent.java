@@ -91,11 +91,11 @@ public class AddStudent {
 
 		semesterSelectEvent = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				slcStudent.setItems(FXCollections.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterDelete.getValue())));
-				System.out.println(slcSemesterDelete.getValue());
+				slcStudent.setItems(FXCollections
+						.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterDelete.getValue())));
 			}
 		};
-		
+
 		slcSemesterDelete.setOnAction(semesterSelectEvent);
 
 		slcSemesterDelete.setMinSize(150, 50);
@@ -111,6 +111,10 @@ public class AddStudent {
 		return slcStudent;
 	}
 
+	//////////////////////////////
+	// Buttons
+	//////////////////////////////
+
 	private GridPane studentCreateButton() {
 		GridPaneCenter grid = new GridPaneCenter();
 
@@ -120,9 +124,6 @@ public class AddStudent {
 
 			controller.createStudent(newStudent);
 			textArea.setText(textArea.getText() + newStudent + " has been added.\n");
-
-			System.out.println("create knap trykket");
-
 		});
 
 		return grid;
@@ -138,12 +139,13 @@ public class AddStudent {
 			controller.deleteStudent(selectedStudent);
 			textArea.setText(textArea.getText() + selectedStudent + " has been deleted.\n");
 
-			slcStudent.setItems(FXCollections.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterDelete.getValue())));
+			slcStudent.setItems(FXCollections
+					.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterDelete.getValue())));
 		});
 
 		return grid;
 	}
-	
+
 	private GridPane backButton() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
