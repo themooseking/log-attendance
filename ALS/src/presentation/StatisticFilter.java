@@ -222,7 +222,7 @@ public class StatisticFilter {
 		GridPaneCenter grid = new GridPaneCenter();
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
-		btnBack.setOnAction(e -> {
+		btnBack.setOnAction(e -> { 
 			new MainMenu(primaryStage).mainMenuUI();
 		});
 
