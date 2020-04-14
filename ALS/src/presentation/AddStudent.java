@@ -94,8 +94,7 @@ public class AddStudent {
 	}
 
 	private ComboBox<Student> selectStudent() {
-		// slcStudent = new
-		// ComboBox<String>(FXCollections.observableArrayList(studentListBySemesterNo));
+		slcStudent = new ComboBox<Student>(FXCollections.observableArrayList(studentListBySemesterNo));
 
 		slcStudent.setMinSize(150, 50);
 

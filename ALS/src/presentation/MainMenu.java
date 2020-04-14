@@ -23,9 +23,6 @@ public class MainMenu {
 	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private ArrayList<Course> courseList;
-//	private int Educator;
-//	private String Lesson1;
-//	private String Lesson2;  
 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -46,8 +43,11 @@ public class MainMenu {
 
 	private HBox gridSetup() {
 		VBox vboxLeft = new VBox(courseButtons());
+		vboxLeft.setAlignment(Pos.CENTER);
 		VBox vboxMiddle = new VBox(attendanceButton(), logoutButton());
+		vboxMiddle.setAlignment(Pos.CENTER);
 		VBox vboxRight = new VBox(studentButton(), courseButton());
+		vboxRight.setAlignment(Pos.CENTER);
 
 		HBox hbox = new HBox(vboxLeft, vboxMiddle, vboxRight);
 		hbox.setAlignment(Pos.CENTER);
@@ -57,11 +57,14 @@ public class MainMenu {
 
 	private GridPane courseButtons() {
 		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setVgap(20);
 
 		for (int i = 0; i < courseList.size(); i++) {
 			Course course = courseList.get(i);
 			String courseName = course.getCourseName();
 			ButtonWithStyle btn = new ButtonWithStyle(courseName, grid, 0, i);
+			btn.setMinSize(300, 150);
 
 			btn.setOnAction(e -> {
 				LogAttendance logAttendance = new LogAttendance(primaryStage, course);
@@ -102,7 +105,7 @@ public class MainMenu {
 	
 	private GridPane studentButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10 ,50));
+		grid.setPadding(new Insets(10, 10, 10, 50));
 		
 		ButtonWithStyle stButton = new ButtonWithStyle("Edit Students", grid, 1, 0);
 		stButton.setMinSize(300, 150);
@@ -116,7 +119,7 @@ public class MainMenu {
 	
 	private GridPane courseButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10 ,50));
+		grid.setPadding(new Insets(10, 10, 10, 50));
 		
 		ButtonWithStyle coButton = new ButtonWithStyle("Edit Courses", grid, 1, 0);
 		coButton.setMinSize(300, 150);

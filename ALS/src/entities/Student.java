@@ -15,15 +15,11 @@ public class Student {
 		this.semesterNo = semesterNo;
 	}
 	
-	
-
 	public Student(String firstName, String lastName, int semesterNo) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.semesterNo = semesterNo;
 	}
-
-
 
 	public int getStudentId() {
 		return studentId;
@@ -41,7 +37,10 @@ public class Student {
 		return semesterNo;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return firstName + " " + lastName;
+	}
 	
     public static Comparator<Student> StuNameComparator = new Comparator<Student>() {
 

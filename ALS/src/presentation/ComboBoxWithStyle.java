@@ -1,22 +1,21 @@
 package presentation;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
-public class TextFieldWithStyle extends TextField {
+public class ComboBoxWithStyle extends ComboBox<Object> {
 
-	public TextFieldWithStyle(String prompt, GridPaneCenter grid, int row, int col) {
-		super.setPromptText(prompt);
-		super.getStylesheets().add("/presentation/TextField.css");
+	public ComboBoxWithStyle(ObservableList<Object> observableList, GridPaneCenter grid, int row, int col) {
+		super(observableList);
+		super.getStylesheets().add("/presentation/ComboBox.css");
 
-		super.setFont(Font.font("Calibri", 24));
 		super.setPrefSize(400, 80);
 
 		defaultEffect(this);
@@ -25,10 +24,11 @@ public class TextFieldWithStyle extends TextField {
 		super.onMouseExitedProperty().set(e -> defaultEffect(this));
 		
 		GridPane.setConstraints(grid, row, col);
-		grid.getChildren().add(this);
+		grid.getChildren().add(this); 
 	}
+
 	
-	private void enterEffect(TextField obj) {
+	private void enterEffect(ComboBox<Object> obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#118ABB"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 
@@ -36,7 +36,7 @@ public class TextFieldWithStyle extends TextField {
 		obj.setCursor(Cursor.HAND);
 	}
 	
-	private void defaultEffect(TextField obj) {
+	private void defaultEffect(ComboBox<Object> obj) {
 		BackgroundFill background_fill = new BackgroundFill(Color.web("#F9F9F9"), new CornerRadii(0), Insets.EMPTY);
 		Background background = new Background(background_fill);
 		
