@@ -11,14 +11,16 @@ public class CalculateAttendance {
 	private LocalDate endDate;
 	private long daySpan;
 	private ArrayList<Course> courseList;
+	private ArrayList<Student> studentList;
 	private float[] absenceArr;
 
-	public CalculateAttendance(LocalDate sDate, LocalDate eDate, ArrayList<Course> cList) {
+	public CalculateAttendance(LocalDate sDate, LocalDate eDate, ArrayList<Course> cList, ArrayList<Student> sList) {
 		this.startDate = sDate;
 		this.endDate = eDate;
 		this.daySpan = ChronoUnit.DAYS.between(startDate, endDate);
 		this.absenceArr = new float[(int) daySpan + 1];
 		this.courseList = cList;
+		this.studentList = sList;
 	}	
 	
 	public float[] calculateCourseAttendance(int i) {
@@ -48,6 +50,14 @@ public class CalculateAttendance {
 		
 		return absent;
 	}
+	
+//	public void averageAbsence() {
+//		float[] absenceArr = new float[(int) daySpan + 1];
+//		
+//		for(int i = 0; i < absenceArr.length; i++) {
+//			
+//		}
+//	}
 
 	public float[] studentAttendance() {
 		float[] attendanceArr = new float[(int) daySpan + 1];
