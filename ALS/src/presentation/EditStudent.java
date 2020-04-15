@@ -30,9 +30,9 @@ public class EditStudent {
 	private TextFieldWithStyle tfLastName;
 	private TextArea textArea;
 	private EventHandler<ActionEvent> studentUpdateEvent;
-	private ComboBox<Integer> slcSemesterCreate;
-	private ComboBox<Integer> slcSemesterDelete;
-	private ComboBox<Student> slcStudent;
+	private ComboBoxWithStyle slcSemesterCreate;
+	private ComboBoxWithStyle slcSemesterDelete;
+	private ComboBoxWithStyle slcStudent;
 	private ArrayList<Integer> semesterNo = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
 
 	public EditStudent(Stage primaryStage) {
@@ -91,18 +91,24 @@ public class EditStudent {
 	// ComboBoxes
 	//////////////////////////////
 
-	private ComboBox<Integer> selectSemesterNoCreate() {
-		slcSemesterCreate = new ComboBox<Integer>(FXCollections.observableArrayList(semesterNo));
+	private GridPane selectSemesterNoCreate() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+
+		slcSemesterCreate = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
 
 		slcSemesterCreate.setPromptText("Select Semester No");
 
 		slcSemesterCreate.setMinSize(150, 50);
 
-		return slcSemesterCreate;
+		return grid;
 	}
 
-	private ComboBox<Integer> selectSemesterNoDelete() {
-		slcSemesterDelete = new ComboBox<Integer>(FXCollections.observableArrayList(semesterNo));
+	private GridPane selectSemesterNoDelete() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		slcSemesterDelete = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
 
 		slcSemesterDelete.setPromptText("Select Semester No");
 
@@ -110,17 +116,20 @@ public class EditStudent {
 
 		slcSemesterDelete.setMinSize(150, 50);
 
-		return slcSemesterDelete;
+		return grid;
 	}
 
-	private ComboBox<Student> selectStudent() {
-		slcStudent = new ComboBox<Student>(FXCollections.observableArrayList());
+	private GridPane selectStudent() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		slcStudent = new ComboBoxWithStyle(FXCollections.observableArrayList(), grid, 0, 0);
 
 		slcStudent.setPromptText("Select Student");
 
 		slcStudent.setMinSize(150, 50);
 
-		return slcStudent;
+		return grid;
 	}
 
 	//////////////////////////////
@@ -133,13 +142,16 @@ public class EditStudent {
 
 		ButtonWithStyle createStudentButton = new ButtonWithStyle("Create", grid, 0, 0);
 		createStudentButton.setOnAction(e -> {
-			Student newStudent = new Student(tfFirstName.getText(), tfLastName.getText(), slcSemesterCreate.getValue());
+			Student newStudent = new Student(tfFirstName.getText(), tfLastName.getText(),
+					(int) slcSemesterCreate.getValue());
 
 			controller.createStudent(newStudent);
 			textArea.setText(textArea.getText() + newStudent + " has been added.\n");
-			
-			slcStudent.setItems(FXCollections
-					.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterCreate.getValue())));
+
+			if ((int) slcSemesterCreate.getValue() == (int) slcSemesterDelete.getValue()) {
+				slcStudent.setItems(FXCollections
+						.observableArrayList(controller.getStudentsBySemesterNo((int) slcSemesterCreate.getValue())));
+			}
 		});
 
 		return grid;
@@ -151,13 +163,13 @@ public class EditStudent {
 
 		ButtonWithStyle deleteStudentButton = new ButtonWithStyle("Delete", grid, 0, 0);
 		deleteStudentButton.setOnAction(e -> {
-			Student selectedStudent = slcStudent.getValue();
+			Student selectedStudent = (Student) slcStudent.getValue();
 
 			controller.deleteStudent(selectedStudent);
 			textArea.setText(textArea.getText() + selectedStudent + " has been deleted.\n");
 
 			slcStudent.setItems(FXCollections
-					.observableArrayList(controller.getStudentsBySemesterNo(slcSemesterDelete.getValue())));
+					.observableArrayList(controller.getStudentsBySemesterNo((int) slcSemesterDelete.getValue())));
 		});
 
 		return grid;
@@ -174,15 +186,15 @@ public class EditStudent {
 
 		return grid;
 	}
-	
+
 	//////////////////////////////
 	// Event Handler
 	//////////////////////////////
-	
-	private EventHandler<ActionEvent> updateStudentsCombobox(){
+
+	private EventHandler<ActionEvent> updateStudentsCombobox() {
 		studentUpdateEvent = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				ArrayList<Student> studentsList = controller.getStudentsBySemesterNo(slcSemesterDelete.getValue());
+				ArrayList<Student> studentsList = controller.getStudentsBySemesterNo((int) slcSemesterDelete.getValue());
 				slcStudent.setItems(FXCollections.observableArrayList(studentsList));
 			}
 		};

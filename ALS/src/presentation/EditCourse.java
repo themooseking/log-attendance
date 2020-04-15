@@ -31,9 +31,9 @@ public class EditCourse {
 	private DB_Controller controller = new DB_Controller();
 	private TextFieldWithStyle tfcourseName;
 	private TextArea textArea;
-	private ComboBox<Integer> slcSemesterCreate;
-	private ComboBox<Educator> slcEducator;
-	private ComboBox<Course> slcCourse;
+	private ComboBoxWithStyle slcSemesterCreate;
+	private ComboBoxWithStyle slcEducator;
+	private ComboBoxWithStyle slcCourse;
 	private ArrayList<Integer> semesterNo = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
 
 	public EditCourse(Stage primaryStage) {
@@ -82,36 +82,45 @@ public class EditCourse {
 	// ComboBoxes
 	//////////////////////////////
 
-	private ComboBox<Integer> selectSemesterNoCreate() {
-		slcSemesterCreate = new ComboBox<Integer>(FXCollections.observableArrayList(semesterNo));
+	private GridPane selectSemesterNoCreate() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		slcSemesterCreate = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
 
 		slcSemesterCreate.setPromptText("Select Semester No");
 
 		slcSemesterCreate.setMinSize(150, 50);
 
-		return slcSemesterCreate;
+		return grid;
 	}
 
-	private ComboBox<Educator> selectEducator() {
+	private GridPane selectEducator() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		
 		ArrayList<Educator> EducatorsList = controller.getEducatorList();
-		slcEducator = new ComboBox<Educator>(FXCollections.observableArrayList(EducatorsList));
+		slcEducator = new ComboBoxWithStyle(FXCollections.observableArrayList(EducatorsList), grid, 0, 0);
 
 		slcEducator.setPromptText("Select Educator");
 
 		slcEducator.setMinSize(150, 50);
 
-		return slcEducator;
+		return grid;
 	}
 
-	private ComboBox<Course> selectCourse() {
+	private GridPane selectCourse() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		
 		ArrayList<Course> coursesList = controller.getCourseList();
-		slcCourse = new ComboBox<Course>(FXCollections.observableArrayList(coursesList));
+		slcCourse = new ComboBoxWithStyle(FXCollections.observableArrayList(coursesList), grid, 0, 0);
 
 		slcCourse.setPromptText("Select Course");
 
 		slcCourse.setMinSize(150, 50);
 
-		return slcCourse;
+		return grid;
 	}
 
 	//////////////////////////////
@@ -124,7 +133,7 @@ public class EditCourse {
 
 		ButtonWithStyle createCourseButton = new ButtonWithStyle("Create", grid, 0, 0);
 		createCourseButton.setOnAction(e -> {
-			Course newCourse = new Course(tfcourseName.getText(), slcSemesterCreate.getValue(), slcEducator.getValue());
+			Course newCourse = new Course(tfcourseName.getText(), (int) slcSemesterCreate.getValue(), (Educator) slcEducator.getValue());
 
 			controller.createCourse(newCourse);
 			textArea.setText(textArea.getText() + "The course " + newCourse + " has been added.\n");
@@ -141,7 +150,7 @@ public class EditCourse {
 
 		ButtonWithStyle courseDeleteButton = new ButtonWithStyle("Delete", grid, 0, 0);
 		courseDeleteButton.setOnAction(e -> {
-			Course selectedCourse = slcCourse.getValue();
+			Course selectedCourse = (Course) slcCourse.getValue();
 
 			controller.deleteCourse(selectedCourse);
 			textArea.setText(textArea.getText() + "The course " + selectedCourse + " has been deleted.\n");

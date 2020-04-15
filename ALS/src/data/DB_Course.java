@@ -17,7 +17,7 @@ public class DB_Course {
 
 	public void createCourse(Course course) {
 		try {
-			String sql = "INSERT INTO absence VALUES (?, ?, ?)";
+			String sql = "INSERT INTO course VALUES (?, ?, ?)";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
 			statement.setString(1, course.getCourseName());
@@ -47,7 +47,7 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				
+
 				Educator educator = null;
 				for (int i = 0; i < educatorList.size(); i++) {
 					if (educatorList.get(i).getEducatorId() == resultSet.getInt("educator_id")) {
@@ -82,7 +82,7 @@ public class DB_Course {
 				int courseId = resultSet.getInt("id");
 				String courseName = resultSet.getString("course_name");
 				int semesterNo = resultSet.getInt("semester_no");
-				
+
 				Educator educator = null;
 				for (int i = 0; i < educatorList.size(); i++) {
 					if (educatorList.get(i).getEducatorId() == id) {
