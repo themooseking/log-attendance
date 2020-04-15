@@ -120,7 +120,7 @@ public class MainMenu {
 		stButton.setMinSize(300, 150);
 		
 		stButton.setOnAction(e -> {
-			new AddStudent(primaryStage).editStudentUI();
+			new EditStudent(primaryStage).editStudentUI();
 		});
 		
 		return grid;
@@ -134,7 +134,7 @@ public class MainMenu {
 		coButton.setMinSize(300, 150);
 		
 		coButton.setOnAction(e -> {
-			//Course
+			new EditCourse(primaryStage).editCourseUI();
 		});
 		
 		return grid;

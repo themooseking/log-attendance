@@ -39,7 +39,7 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return firstName + " " + lastName;
+		return firstName + " " + lastName + ", " + studentId;
 	}
 	
     public static Comparator<Student> StuNameComparator = new Comparator<Student>() {
