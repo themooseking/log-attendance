@@ -17,6 +17,7 @@ public class TextAreaWithStyle extends TextArea{
 		super.setFont(Font.font("Calibri", 16));
 		super.setPrefSize(400, 1200);
 		super.setWrapText(true);
+		super.setEditable(false);
 
 		defaultEffect(this);
 
