@@ -30,7 +30,7 @@ public class EditCourse {
 	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private TextFieldWithStyle tfcourseName;
-	private TextArea textArea;
+	private TextAreaWithStyle textArea;
 	private ComboBoxWithStyle slcSemesterCreate;
 	private ComboBoxWithStyle slcEducator;
 	private ComboBoxWithStyle slcCourse;
@@ -45,12 +45,12 @@ public class EditCourse {
 				courseCreateButton());
 		createCourseVBox.setAlignment(Pos.TOP_CENTER);
 		createCourseVBox.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		VBox deleteCourseVBox = new VBox(deleteTitle(), selectCourse(), courseDeleteButton());
 		deleteCourseVBox.setAlignment(Pos.TOP_CENTER);
 		deleteCourseVBox.setPadding(new Insets(10, 10, 10, 10));
-		
-		VBox historyVBox = new VBox(textAreaTitle(), textArea = new TextArea());
+
+		VBox historyVBox = new VBox(textAreaTitle(), historyArea());
 		historyVBox.setAlignment(Pos.CENTER);
 		historyVBox.setPadding(new Insets(10, 10, 10, 10));
 
@@ -79,13 +79,26 @@ public class EditCourse {
 	}
 
 	//////////////////////////////
+	// TextAreas
+	//////////////////////////////
+
+	private GridPane historyArea() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+
+		textArea = new TextAreaWithStyle(grid, 0, 0);
+
+		return grid;
+	}
+
+	//////////////////////////////
 	// ComboBoxes
 	//////////////////////////////
 
 	private GridPane selectSemesterNoCreate() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		slcSemesterCreate = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
 
 		slcSemesterCreate.setPromptText("Select Semester No");
@@ -98,7 +111,7 @@ public class EditCourse {
 	private GridPane selectEducator() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		ArrayList<Educator> EducatorsList = controller.getEducatorList();
 		slcEducator = new ComboBoxWithStyle(FXCollections.observableArrayList(EducatorsList), grid, 0, 0);
 
@@ -112,7 +125,7 @@ public class EditCourse {
 	private GridPane selectCourse() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		ArrayList<Course> coursesList = controller.getCourseList();
 		slcCourse = new ComboBoxWithStyle(FXCollections.observableArrayList(coursesList), grid, 0, 0);
 
@@ -133,11 +146,12 @@ public class EditCourse {
 
 		ButtonWithStyle createCourseButton = new ButtonWithStyle("Create", grid, 0, 0);
 		createCourseButton.setOnAction(e -> {
-			Course newCourse = new Course(tfcourseName.getText(), (int) slcSemesterCreate.getValue(), (Educator) slcEducator.getValue());
+			Course newCourse = new Course(tfcourseName.getText(), (int) slcSemesterCreate.getValue(),
+					(Educator) slcEducator.getValue());
 
 			controller.createCourse(newCourse);
 			textArea.setText(textArea.getText() + "The course " + newCourse + " has been added.\n");
-			
+
 			slcCourse.setItems(FXCollections.observableArrayList(controller.getCourseList()));
 		});
 
@@ -154,7 +168,7 @@ public class EditCourse {
 
 			controller.deleteCourse(selectedCourse);
 			textArea.setText(textArea.getText() + "The course " + selectedCourse + " has been deleted.\n");
-			
+
 			slcCourse.setItems(FXCollections.observableArrayList(controller.getCourseList()));
 		});
 
@@ -186,21 +200,21 @@ public class EditCourse {
 
 	private Label createTitle() {
 		Label label = new Label("Create Course");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
 
 	private Label deleteTitle() {
 		Label label = new Label("Delete Course");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
 
 	private Label textAreaTitle() {
 		Label label = new Label("History of Actions");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}

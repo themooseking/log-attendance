@@ -28,7 +28,7 @@ public class EditStudent {
 	private DB_Controller controller = new DB_Controller();
 	private TextFieldWithStyle tfFirstName;
 	private TextFieldWithStyle tfLastName;
-	private TextArea textArea;
+	private TextAreaWithStyle textArea;
 	private EventHandler<ActionEvent> studentUpdateEvent;
 	private ComboBoxWithStyle slcSemesterCreate;
 	private ComboBoxWithStyle slcSemesterDelete;
@@ -50,7 +50,7 @@ public class EditStudent {
 		deleteStudentVBox.setAlignment(Pos.TOP_CENTER);
 		deleteStudentVBox.setPadding(new Insets(10, 10, 10, 10));
 
-		VBox historyVBox = new VBox(textAreaTitle(), textArea = new TextArea());
+		VBox historyVBox = new VBox(textAreaTitle(), historyArea());
 		historyVBox.setAlignment(Pos.TOP_CENTER);
 		historyVBox.setPadding(new Insets(10, 10, 10, 10));
 
@@ -86,7 +86,20 @@ public class EditStudent {
 
 		return grid;
 	}
+	
+	//////////////////////////////
+	// TextAreas
+	//////////////////////////////
+	
+	private GridPane historyArea() {
+		GridPaneCenter grid = new GridPaneCenter();
+		grid.setPadding(new Insets(10, 10, 10, 10));
 
+		textArea = new TextAreaWithStyle(grid, 0, 0);
+
+		return grid;
+	}
+	
 	//////////////////////////////
 	// ComboBoxes
 	//////////////////////////////
@@ -214,21 +227,21 @@ public class EditStudent {
 
 	private Label createTitle() {
 		Label label = new Label("Create Students");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
 
 	private Label deleteTitle() {
 		Label label = new Label("Delete Students");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
 
 	private Label textAreaTitle() {
 		Label label = new Label("History of Actions");
-		label.setFont(Font.font("Calibri", FontWeight.BOLD, 60));
+		label.setFont(Font.font("Calibri", FontWeight.BOLD, 50));
 		label.setTextFill(Color.web("#F9F9F9"));
 		return label;
 	}
