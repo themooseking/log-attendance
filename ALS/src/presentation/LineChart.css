@@ -19,7 +19,17 @@
 	-fx-text-fill: #F9F9F9;
 }
 
-.chart-legend{
+.chart-legend {
 	-fx-translate-y: 20;
+	-fx-translate-x: 40;
+   	-fx-background-color:  transparent;
+   	-fx-padding: 20px;
+	-fx-font-size: 28;
+}
+ 
+.chart-legend-item{
+    -fx-text-fill: rgb(255, 255, 255);
 }
 
+.default-color0.chart-series-line { -fx-stroke: #118ABB, #118ABB; }
+.default-color0.chart-line-symbol { -fx-background-color: #118ABB, #118ABB; }

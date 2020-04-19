@@ -58,9 +58,9 @@ public class CourseStatistics {
 		NumberAxis yAxis = new NumberAxis(0, 100, 5);
 
 		if (diagramSwitch) {
-			yAxis.setLabel("Absence");
-		} else {
 			yAxis.setLabel("Attendance");
+		} else {
+			yAxis.setLabel("Absence");
 		}
 
 		return yAxis;
@@ -96,13 +96,13 @@ public class CourseStatistics {
 //		grid.getChildren().remove(0);
 
 		if (!diagramSwitch) {
-			RadioButtonWithStyle switchButton = new RadioButtonWithStyle("Attendance", grid, 1, 0);
+			RadioButtonWithStyle switchButton = new RadioButtonWithStyle("Absence", grid, 1, 0);
 			switchButton.setOnAction(e -> {
 				courseStatisticsUI();
 			});
 			diagramSwitch = true;
 		} else {
-			RadioButtonWithStyle switchButton = new RadioButtonWithStyle("Absence", grid, 1, 0);
+			RadioButtonWithStyle switchButton = new RadioButtonWithStyle("Attendance", grid, 1, 0);
 			switchButton.setOnAction(e -> {
 				courseStatisticsUI();
 			});
@@ -115,10 +115,6 @@ public class CourseStatistics {
 	//////////////////////////////
 	// Back
 	//////////////////////////////
-
-//////////////////////////////
-// KIG HER
-//////////////////////////////
 
 	private HBox bButton() {
 		HBox hbox = new HBox(backButton());
