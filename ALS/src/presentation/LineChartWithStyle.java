@@ -33,12 +33,12 @@ public class LineChartWithStyle<X, Y> extends LineChart<X, Y> {
 //		dataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
 		dataSeries.setName("Average");
 		
-		float[] arr;
+		float[] arr = null;
 
 		if (!diagramSwitch) {
-			arr = calcAtt.calculateAbsence();
+			arr = calcAtt.averageAbsence();
 		} else {
-			arr = calcAtt.studentAttendance();
+			arr = calcAtt.averageAbsence();
 		}
 		
 		int index = 0;
