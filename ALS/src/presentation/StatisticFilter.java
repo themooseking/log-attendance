@@ -33,6 +33,7 @@ public class StatisticFilter {
 	private ArrayList<Student> studentList = new ArrayList<Student>();
 	private ArrayList<Student> selectedStudentList = new ArrayList<Student>();
 	private ScrollPaneWithStyle ssp;
+	private ButtonWithStyle btnFetch;
 
 	public StatisticFilter(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -72,51 +73,39 @@ public class StatisticFilter {
 		for (int i = 0; i < courseList.size(); i++) {
 			String courseName = courseList.get(i).getCourseName();
 
-			RadioButtonWithStyle rb = new RadioButtonWithStyle(courseName, grid, 0, i); 
+			RadioButtonWithStyle rb = new RadioButtonWithStyle(courseName, grid, 0, i);
 			rb.setPadding(new Insets(0, 0, 0, 20));
 			rb.setOnAction(e -> {
 				for (int j = 0; j < courseList.size(); j++) {
 					boolean checker = rb.getText().equals(courseList.get(j).getCourseName());
 
 					if (checker && rb.isSelected()) {
+						selectedStudentList.clear();
 						selectedCourseList.add(courseList.get(j));
 						updateStudentScrollPane();
+						btnFetch.setDisable(false);
 					} else if (checker && !rb.isSelected()) {
+						selectedStudentList.clear();
 						selectedCourseList.remove(courseList.get(j));
 						updateStudentScrollPane();
+						if (selectedCourseList.isEmpty()) {
+							btnFetch.setDisable(true);
+						}
 					}
 				}
 			});
 		}
 		return grid;
 	}
-	
+
 	private void updateStudentScrollPane() {
 		ssp.setContent(null);
 		studentList.clear();
 		studentList.addAll(controller.getStudentsByCourseList(selectedCourseList));
 		ssp.setContent(studentSetup());
 	}
-	
-//	private void addToStudentList(int courseListIndex) {
-//		if (studentList.size() > 0) {
-//			for (int i = 0; i < studentList.size(); i++) {
-//				Course course = courseList.get(courseListIndex);
-//				ArrayList<Student> student = controller.getStudentsByCourse(course);
-//				for (int j = 0; j < student.size(); j++) {
-//					if (!studentList.get(i).equals(student.get(j))) {
-//						studentList.add(student.get(j));
-//					}
-//				}			
-//			}
-//		} else {
-//			studentList = controller.getStudentsByCourseList(selectedCourseList);
-//		}
-//
-//	}
 
-
-	////////////////////////////// 
+	//////////////////////////////
 	// STUDENT
 	//////////////////////////////
 
@@ -132,7 +121,7 @@ public class StatisticFilter {
 
 	private GridPane studentSetup() {
 		GridPaneCenter grid = new GridPaneCenter();
-		
+
 		selectedStudentList.addAll(studentList);
 
 		for (int i = 0; i < studentList.size(); i++) {
@@ -146,8 +135,12 @@ public class StatisticFilter {
 
 					if (checker && rb.isSelected()) {
 						selectedStudentList.add(studentList.get(j));
+						btnFetch.setDisable(false);
 					} else if (checker && !rb.isSelected()) {
 						selectedStudentList.remove(studentList.get(j));
+						if (selectedStudentList.isEmpty()) {
+							btnFetch.setDisable(true);
+						}
 					}
 				}
 			});
@@ -209,9 +202,12 @@ public class StatisticFilter {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
 
-		ButtonWithStyle btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
+		btnFetch = new ButtonWithStyle("Fetch", grid, 0, 0);
+		btnFetch.setDisable(true);
+		;
 		btnFetch.setOnAction(e -> {
-			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList, selectedStudentList);
+			CalculateAttendance selectedData = new CalculateAttendance(startDate, endDate, selectedCourseList,
+					selectedStudentList);
 			new CourseStatistics(primaryStage, selectedData, selectedCourseList).courseStatisticsUI();
 		});
 
@@ -222,7 +218,7 @@ public class StatisticFilter {
 		GridPaneCenter grid = new GridPaneCenter();
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
-		btnBack.setOnAction(e -> { 
+		btnBack.setOnAction(e -> {
 			new MainMenu(primaryStage).mainMenuUI();
 		});
 
