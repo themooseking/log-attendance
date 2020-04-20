@@ -8,7 +8,7 @@
 
 .scroll-bar:vertical, 
 .scroll-bar:horizontal {
-    
+    -fx-background-color: #ffffff;
 	-fx-padding: 0;
 }
 
