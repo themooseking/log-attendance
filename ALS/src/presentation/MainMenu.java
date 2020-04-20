@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entities.Course;
-import entities.Educator;
 import entities.Timetable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,12 +23,10 @@ public class MainMenu {
 	private Stage primaryStage;
 	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
-	private ArrayList<Course> courseList;
 	private ArrayList<Timetable> timetableList;
 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		courseList = controller.getCoursesByEduId(LoggedInST.getUser().getEducatorId());
 		timetableList = controller.getTimeTableList();
 	}
 

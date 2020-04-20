@@ -1,6 +1,5 @@
 package presentation;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 import entities.Course;
@@ -9,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;

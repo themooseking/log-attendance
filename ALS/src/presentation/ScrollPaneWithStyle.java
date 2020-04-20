@@ -1,7 +1,5 @@
 package presentation;
 
-import java.awt.TextArea;
-
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 
