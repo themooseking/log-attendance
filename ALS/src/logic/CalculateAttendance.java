@@ -49,13 +49,11 @@ public class CalculateAttendance {
 		float[] avgArr = new float[(int) daySpan + 1];
 		int index = 0;
 
-		for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
+		for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1), index++) {
 			for (int i = 0; i < totalCourses; i++) {
 				avgArr[index] += (float) absentStudents(date, courseList.get(i)) / totalStudents * 100
 						/ totalCourses;
 			}
-			
-			index++;
 		}
 
 		return avgArr;
@@ -67,15 +65,13 @@ public class CalculateAttendance {
 		float[] avgArr = new float[(int) daySpan + 1];
 		int index = 0;
 
-		for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
+		for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1), index++) {
 			avgArr[index] = 100;
 			
 			for (int i = 0; i < totalCourses; i++) {
 				avgArr[index] -= (float) absentStudents(date, courseList.get(i)) / totalStudents * 100
 						/ totalCourses;
 			}
-			
-			index++;
 		}
 
 		return avgArr;
