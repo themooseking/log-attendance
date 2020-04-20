@@ -5,3 +5,29 @@
 	-fx-font-family: "Calibri";
 	-fx-font-weight: BOLD;
 } 
+
+.scroll-bar:vertical, 
+.scroll-bar:horizontal {
+    
+	-fx-padding: 0;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb{
+    -fx-background-color: #3D3D3D;
+	-fx-background-radius: 0;
+	-fx-background-insets: 0;
+}
+
+.scroll-bar:vertical > .increment-button,
+.scroll-bar:vertical > .decrement-button {
+	-fx-background-color :transparent;
+    -fx-background-radius : 0;
+    -fx-padding :0;
+    -fx-shape: " ";
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow {
+    -fx-shape: " ";
+}

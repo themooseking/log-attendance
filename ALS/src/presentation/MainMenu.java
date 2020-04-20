@@ -62,6 +62,7 @@ public class MainMenu {
 	private GridPane courseButtons() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setMinWidth(300);
 		grid.setVgap(20);
 		int i = 0;
 		
