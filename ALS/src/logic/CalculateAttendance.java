@@ -60,6 +60,26 @@ public class CalculateAttendance {
 
 		return avgArr;
 	}
+	
+	public float[] averageAttendance() {
+		float totalStudents = (float) studentList.size();
+		float totalCourses = (float) courseList.size();
+		float[] avgArr = new float[(int) daySpan + 1];
+		int index = 0;
+
+		for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
+			avgArr[index] = 100;
+			
+			for (int i = 0; i < totalCourses; i++) {
+				avgArr[index] -= (float) absentStudents(date, courseList.get(i)) / totalStudents * 100
+						/ totalCourses;
+			}
+			
+			index++;
+		}
+
+		return avgArr;
+	}
 
 	private int absentStudents(LocalDate date, Course course) {
 		ArrayList<Absence> studentAbsenceCourseList = controller.getAbsenceByCourse(course);
