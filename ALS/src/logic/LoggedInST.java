@@ -14,8 +14,7 @@ public class LoggedInST {
 		
 		if (inst == null) {
 			inst = new LoggedInST();
-		}		
-		
+		}				
 		return inst;		
 	}
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import entities.*;
 
 public class CalculateAttendance {
-	private DB_Controller controller = new DB_Controller();
+	
 	private LocalDate startDate;
 	private LocalDate endDate;
 	private long daySpan;
@@ -78,7 +78,7 @@ public class CalculateAttendance {
 	}
 
 	private int absentStudents(LocalDate date, Course course) {
-		ArrayList<Absence> studentAbsenceCourseList = controller.getAbsenceByCourse(course);
+		ArrayList<Absence> studentAbsenceCourseList = new DB_Controller().getAbsenceByCourse(course);
 
 		int studentsAbsent = 0;
 

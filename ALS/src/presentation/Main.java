@@ -9,27 +9,9 @@ public class Main extends Application {
 		launch(args);
 	}
 
-//	@Override
-//	public void start(Stage primaryStage) throws Exception {
-//		LogAttendance la = new LogAttendance(primaryStage); 
-//		la.logAttendanceUI();
-//	}
-
-//	@Override
-//	public void start(Stage primaryStage) throws Exception {
-//		StatisticFilter sf = new StatisticFilter(primaryStage);
-//		sf.filterUI();
-//	}
-
-//	@Override
-//	public void start(Stage primaryStage) throws Exception {
-//		CourseStatistics stats = new CourseStatistics(primaryStage);
-//		stats.courseStatisticsUI();
-//	} 
-
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		LoginScreen login = new LoginScreen(primaryStage); 
+		LoginScreen login = new LoginScreen(primaryStage);
 		login.loginUI();
 	}
 }

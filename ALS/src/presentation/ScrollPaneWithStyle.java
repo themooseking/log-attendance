@@ -19,7 +19,6 @@ public class ScrollPaneWithStyle extends ScrollPane {
 	}
 
 	private void enterEffect(ScrollPane obj) {
-
 		obj.setPannable(true);
 	}
 

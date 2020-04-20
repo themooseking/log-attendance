@@ -23,8 +23,6 @@ import logic.DB_Controller;
 public class StatisticFilter {
 
 	private Stage primaryStage;
-	private VBoxWithStyle vbox;
-	private HBox hbox;
 	private DB_Controller controller = new DB_Controller();
 	private LocalDate startDate = LocalDate.now().minusDays(7);
 	private LocalDate endDate = LocalDate.now();
@@ -44,10 +42,10 @@ public class StatisticFilter {
 		VBox dpBox = new VBox(startDatePicker(), endDatePicker());
 		dpBox.setAlignment(Pos.CENTER);
 
-		hbox = new HBox(courseScrollPane(), studentScrollPane(), dpBox);
+		HBox hbox = new HBox(courseScrollPane(), studentScrollPane(), dpBox);
 		hbox.setAlignment(Pos.CENTER);
 
-		vbox = new VBoxWithStyle(title(), hbox, buttons());
+		VBoxWithStyle vbox = new VBoxWithStyle(title(), hbox, buttons());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);

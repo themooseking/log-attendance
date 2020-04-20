@@ -70,7 +70,7 @@ public class LogAttendance {
 			});
 
 			y++;
-			if (y == 9) {
+			if (y == 12) {
 				y = 0;
 				x++;
 			}

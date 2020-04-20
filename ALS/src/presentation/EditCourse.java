@@ -21,14 +21,12 @@ import logic.DB_Controller;
 
 public class EditCourse {
 	private Stage primaryStage;
-	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private TextFieldWithStyle tfcourseName;
 	private TextAreaWithStyle textArea;
 	private ComboBoxWithStyle slcSemesterCreate;
 	private ComboBoxWithStyle slcEducator;
 	private ComboBoxWithStyle slcCourse;
-	private ArrayList<Integer> semesterNo = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
 
 	public EditCourse(Stage primaryStage) {
 		this.primaryStage = primaryStage;
@@ -37,26 +35,28 @@ public class EditCourse {
 	public void editCourseUI() {
 		VBox createCourseVBox = new VBox(createTitle(), courseName(), selectSemesterNoCreate(), selectEducator(),
 				courseCreateButton());
-		createCourseVBox.setAlignment(Pos.TOP_CENTER);
-		createCourseVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(createCourseVBox);
 
 		VBox deleteCourseVBox = new VBox(deleteTitle(), selectCourse(), courseDeleteButton());
-		deleteCourseVBox.setAlignment(Pos.TOP_CENTER);
-		deleteCourseVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(deleteCourseVBox);
 
 		VBox historyVBox = new VBox(textAreaTitle(), historyArea());
-		historyVBox.setAlignment(Pos.CENTER);
-		historyVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(historyVBox);
 
 		HBox courseBoxesAndTextArea = new HBox(createCourseVBox, deleteCourseVBox, historyVBox);
 		courseBoxesAndTextArea.setAlignment(Pos.CENTER);
 		courseBoxesAndTextArea.setPadding(new Insets(10, 10, 10, 10));
 
-		vbox = new VBoxWithStyle(title(), courseBoxesAndTextArea, backButton());
+		VBoxWithStyle vbox = new VBoxWithStyle(title(), courseBoxesAndTextArea, backButton());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
+	}
+	
+	private void vboxSetters(VBox vbox) {
+		vbox.setAlignment(Pos.TOP_CENTER);
+		vbox.setPadding(new Insets(10, 10, 10, 10));
 	}
 
 	//////////////////////////////
@@ -65,7 +65,6 @@ public class EditCourse {
 
 	private GridPane courseName() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		tfcourseName = new TextFieldWithStyle("Course Name", grid, 0, 0);
 
@@ -78,7 +77,6 @@ public class EditCourse {
 
 	private GridPane historyArea() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		textArea = new TextAreaWithStyle(grid, 0, 0);
 
@@ -91,41 +89,31 @@ public class EditCourse {
 
 	private GridPane selectSemesterNoCreate() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
+		
+		ArrayList<Integer> semesterNo = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5));
 
 		slcSemesterCreate = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
-
 		slcSemesterCreate.setPromptText("Select Semester No");
-
-		slcSemesterCreate.setMinSize(150, 50);
 
 		return grid;
 	}
 
 	private GridPane selectEducator() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ArrayList<Educator> EducatorsList = controller.getEducatorList();
 		slcEducator = new ComboBoxWithStyle(FXCollections.observableArrayList(EducatorsList), grid, 0, 0);
-
 		slcEducator.setPromptText("Select Educator");
-
-		slcEducator.setMinSize(150, 50);
 
 		return grid;
 	}
 
 	private GridPane selectCourse() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ArrayList<Course> coursesList = controller.getCourseList();
 		slcCourse = new ComboBoxWithStyle(FXCollections.observableArrayList(coursesList), grid, 0, 0);
-
 		slcCourse.setPromptText("Select Course");
-
-		slcCourse.setMinSize(150, 50);
 
 		return grid;
 	}
@@ -136,7 +124,6 @@ public class EditCourse {
 
 	private GridPane courseCreateButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle createCourseButton = new ButtonWithStyle("Create", grid, 0, 0);
 		createCourseButton.setOnAction(e -> {
@@ -154,7 +141,6 @@ public class EditCourse {
 
 	private GridPane courseDeleteButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle courseDeleteButton = new ButtonWithStyle("Delete", grid, 0, 0);
 		courseDeleteButton.setOnAction(e -> {
@@ -171,7 +157,6 @@ public class EditCourse {
 
 	private GridPane backButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {

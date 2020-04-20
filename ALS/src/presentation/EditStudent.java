@@ -21,13 +21,12 @@ import javafx.stage.Stage;
 import logic.DB_Controller;
 
 public class EditStudent {
+
 	private Stage primaryStage;
-	private VBoxWithStyle vbox;
 	private DB_Controller controller = new DB_Controller();
 	private TextFieldWithStyle tfFirstName;
 	private TextFieldWithStyle tfLastName;
 	private TextAreaWithStyle textArea;
-	private EventHandler<ActionEvent> studentUpdateEvent;
 	private ComboBoxWithStyle slcSemesterCreate;
 	private ComboBoxWithStyle slcSemesterDelete;
 	private ComboBoxWithStyle slcStudent;
@@ -40,27 +39,29 @@ public class EditStudent {
 	public void editStudentUI() {
 		VBox createStudentVBox = new VBox(createTitle(), firstName(), lastName(), selectSemesterNoCreate(),
 				studentCreateButton());
-		createStudentVBox.setAlignment(Pos.TOP_CENTER);
-		createStudentVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(createStudentVBox);
 
 		VBox deleteStudentVBox = new VBox(deleteTitle(), selectSemesterNoDelete(), selectStudent(),
 				studentDeleteButton());
-		deleteStudentVBox.setAlignment(Pos.TOP_CENTER);
-		deleteStudentVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(deleteStudentVBox);
 
 		VBox historyVBox = new VBox(textAreaTitle(), historyArea());
-		historyVBox.setAlignment(Pos.TOP_CENTER);
-		historyVBox.setPadding(new Insets(10, 10, 10, 10));
+		vboxSetters(historyVBox);
 
 		HBox studentBoxesAndTextArea = new HBox(createStudentVBox, deleteStudentVBox, historyVBox);
 		studentBoxesAndTextArea.setAlignment(Pos.CENTER);
 		studentBoxesAndTextArea.setPadding(new Insets(10, 10, 10, 10));
 
-		vbox = new VBoxWithStyle(title(), studentBoxesAndTextArea, backButton());
+		VBoxWithStyle vbox = new VBoxWithStyle(title(), studentBoxesAndTextArea, backButton());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
 		sceneSetup(scene);
+	}
+
+	private void vboxSetters(VBox vbox) {
+		vbox.setAlignment(Pos.TOP_CENTER);
+		vbox.setPadding(new Insets(10, 10, 10, 10));
 	}
 
 	//////////////////////////////
@@ -69,7 +70,6 @@ public class EditStudent {
 
 	private GridPane firstName() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		tfFirstName = new TextFieldWithStyle("First Name", grid, 0, 0);
 
@@ -78,67 +78,52 @@ public class EditStudent {
 
 	private GridPane lastName() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		tfLastName = new TextFieldWithStyle("Last Name", grid, 0, 0);
 
 		return grid;
 	}
-	
+
 	//////////////////////////////
 	// TextAreas
 	//////////////////////////////
-	
+
 	private GridPane historyArea() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		textArea = new TextAreaWithStyle(grid, 0, 0);
 
 		return grid;
 	}
-	
+
 	//////////////////////////////
 	// ComboBoxes
 	//////////////////////////////
 
 	private GridPane selectSemesterNoCreate() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		slcSemesterCreate = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
-
 		slcSemesterCreate.setPromptText("Select Semester No");
-
-		slcSemesterCreate.setMinSize(150, 50);
 
 		return grid;
 	}
 
 	private GridPane selectSemesterNoDelete() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		slcSemesterDelete = new ComboBoxWithStyle(FXCollections.observableArrayList(semesterNo), grid, 0, 0);
-
 		slcSemesterDelete.setPromptText("Select Semester No");
-
 		slcSemesterDelete.setOnAction(updateStudentsCombobox());
-
-		slcSemesterDelete.setMinSize(150, 50);
 
 		return grid;
 	}
 
 	private GridPane selectStudent() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
-		
+
 		slcStudent = new ComboBoxWithStyle(FXCollections.observableArrayList(), grid, 0, 0);
-
 		slcStudent.setPromptText("Select Student");
-
-		slcStudent.setMinSize(150, 50);
 
 		return grid;
 	}
@@ -149,7 +134,6 @@ public class EditStudent {
 
 	private GridPane studentCreateButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle createStudentButton = new ButtonWithStyle("Create", grid, 0, 0);
 		createStudentButton.setOnAction(e -> {
@@ -170,7 +154,6 @@ public class EditStudent {
 
 	private GridPane studentDeleteButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle deleteStudentButton = new ButtonWithStyle("Delete", grid, 0, 0);
 		deleteStudentButton.setOnAction(e -> {
@@ -188,7 +171,6 @@ public class EditStudent {
 
 	private GridPane backButton() {
 		GridPaneCenter grid = new GridPaneCenter();
-		grid.setPadding(new Insets(10, 10, 10, 10));
 
 		ButtonWithStyle btnBack = new ButtonWithStyle("Back", grid, 1, 0);
 		btnBack.setOnAction(e -> {
@@ -203,9 +185,10 @@ public class EditStudent {
 	//////////////////////////////
 
 	private EventHandler<ActionEvent> updateStudentsCombobox() {
-		studentUpdateEvent = new EventHandler<ActionEvent>() {
+		EventHandler<ActionEvent> studentUpdateEvent = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent e) {
-				ArrayList<Student> studentsList = controller.getStudentsBySemesterNo((int) slcSemesterDelete.getValue());
+				ArrayList<Student> studentsList = controller
+						.getStudentsBySemesterNo((int) slcSemesterDelete.getValue());
 				slcStudent.setItems(FXCollections.observableArrayList(studentsList));
 			}
 		};

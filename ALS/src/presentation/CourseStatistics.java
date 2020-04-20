@@ -53,7 +53,7 @@ public class CourseStatistics {
 	}
 
 	private NumberAxis averageYAxisData() {
-		NumberAxis yAxis = new NumberAxis(0, 100, 5);
+		NumberAxis yAxis = new NumberAxis(0, 100, 10);
 
 		if (diagramSwitch) {
 			yAxis.setLabel("Attendance");

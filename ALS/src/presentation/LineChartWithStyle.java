@@ -30,7 +30,6 @@ public class LineChartWithStyle<X, Y> extends LineChart<X, Y> {
 	
 	public Series<String, Number> prepareAverageData(CalculateAttendance calcAtt, boolean diagramSwitch) {
 		XYChart.Series<String, Number> dataSeries = new XYChart.Series<String, Number>();
-//		dataSeries.setName(calcAtt.getCourseList().get(0).getCourseName());
 		dataSeries.setName("Average");
 		
 		float[] arr = null;
@@ -38,7 +37,7 @@ public class LineChartWithStyle<X, Y> extends LineChart<X, Y> {
 		if (!diagramSwitch) {
 			arr = calcAtt.averageAbsence();
 		} else {
-			arr = calcAtt.averageAbsence();
+			arr = calcAtt.averageAttendance();
 		}
 		
 		int index = 0;

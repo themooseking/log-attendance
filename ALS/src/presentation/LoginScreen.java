@@ -16,21 +16,16 @@ import logic.DB_Controller;
 import logic.LoggedInST;
 
 public class LoginScreen {
-
+	
 	private Stage primaryStage;
-	private VBoxWithStyle vbox;
-	private DB_Controller controller = new DB_Controller();
-	private ArrayList<Educator> educatorList;
 	private ComboBoxWithStyle selectedEducator;
-	private Educator educator;
 
 	public LoginScreen(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.educatorList = controller.getEducatorList();
 	}
 
 	public void loginUI() {
-		vbox = new VBoxWithStyle(title(), selectEducator(), loginSetup());
+		VBoxWithStyle vbox = new VBoxWithStyle(title(), selectEducator(), loginSetup());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980);
@@ -40,6 +35,8 @@ public class LoginScreen {
 	private GridPane selectEducator() {
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(30));
+		
+		ArrayList<Educator> educatorList = new DB_Controller().getEducatorList();
 
 		selectedEducator = new ComboBoxWithStyle(FXCollections.observableArrayList(educatorList), grid, 0, 0);
 		if (LoggedInST.getUser() == null) {
@@ -58,7 +55,7 @@ public class LoginScreen {
 
 		ButtonWithStyle btnLogin = new ButtonWithStyle("Login", grid, 0, 1);
 		btnLogin.setOnAction(e -> {
-			educator = (Educator) selectedEducator.getValue();
+			Educator educator = (Educator) selectedEducator.getValue();
 			LoggedInST.setUser(educator);
 			new MainMenu(primaryStage).mainMenuUI();
 		});

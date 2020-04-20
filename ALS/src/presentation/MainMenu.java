@@ -20,18 +20,16 @@ import logic.DB_Controller;
 import logic.LoggedInST;
 
 public class MainMenu {
+	
 	private Stage primaryStage;
-	private VBoxWithStyle vbox;
-	private DB_Controller controller = new DB_Controller();
-	private ArrayList<Timetable> timetableList;
 
 	public MainMenu(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		timetableList = controller.getTimeTableList();
+		
 	}
 
 	public void mainMenuUI() {
-		vbox = new VBoxWithStyle(title(), gridSetup());
+		VBoxWithStyle vbox = new VBoxWithStyle(title(), gridSetup());
 		vbox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(vbox, 1800, 980); 
@@ -56,12 +54,14 @@ public class MainMenu {
 		return hbox;
 	}
 
-	private GridPane courseButtons() {
+	private GridPane courseButtons() {		
 		GridPaneCenter grid = new GridPaneCenter();
 		grid.setPadding(new Insets(10, 10, 10, 10));
 		grid.setMinWidth(300);
 		grid.setVgap(20);
-		int i = 0;
+		
+		ArrayList<Timetable> timetableList = new DB_Controller().getTimeTableList();
+		int i = 0;		
 		
 		for (Timetable t : timetableList) {
 			if (LocalDate.now().getDayOfWeek().name().equals(t.getPlannedDay().toUpperCase())) {

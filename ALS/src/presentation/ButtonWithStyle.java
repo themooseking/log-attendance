@@ -33,7 +33,6 @@ public class ButtonWithStyle extends Button {
 
 		obj.setBackground(background);
 		obj.setCursor(Cursor.HAND);
-
 		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 
@@ -43,7 +42,6 @@ public class ButtonWithStyle extends Button {
 
 		obj.setBackground(background);
 		obj.setCursor(Cursor.DEFAULT);
-
 		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 

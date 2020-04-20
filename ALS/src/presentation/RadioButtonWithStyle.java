@@ -25,14 +25,12 @@ public class RadioButtonWithStyle extends RadioButton {
 	}
 	
 	private void enterEffect(RadioButton obj) {
-		obj.setCursor(Cursor.HAND);
-		
+		obj.setCursor(Cursor.HAND);		
 		obj.setTextFill(Color.web("#118ABB"));
 	}
 
 	private void defaultEffect(RadioButton obj) {
 		obj.setCursor(Cursor.DEFAULT);
-
 		obj.setTextFill(Color.web("#F9F9F9"));
 	}
 

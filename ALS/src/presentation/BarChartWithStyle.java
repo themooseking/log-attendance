@@ -29,7 +29,6 @@ public class BarChartWithStyle<X, Y> extends BarChart<X, Y> {
 		
 		float[] arr;
 
-
 		for (int i = 0; i < selectedCourseList.size(); i++) {
 			int index = 0;
 

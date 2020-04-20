@@ -10,8 +10,6 @@ import entities.Student;
 public class RegisterAbsence {
 	private ArrayList<Student> selectedStudentList;
 	private Course selectedCourse;
-	private LocalDate today = LocalDate.now();
-	private DB_Controller controller = new DB_Controller();	
 	
 	public RegisterAbsence(ArrayList<Student> selectedStudentList, Course selectedCourse) {
 		this.selectedStudentList = selectedStudentList;
@@ -20,7 +18,8 @@ public class RegisterAbsence {
 
 
 	private ArrayList<Absence> studentAbsenceList() {
-		ArrayList<Absence> studentAbsenceList = new ArrayList<Absence>();
+		ArrayList<Absence> studentAbsenceList = new ArrayList<Absence>();		
+		LocalDate today = LocalDate.now();
 		
 		for (int i = 0; i < selectedStudentList.size(); i++) {
 			studentAbsenceList.add(new Absence(today, selectedStudentList.get(i), selectedCourse));
@@ -30,7 +29,7 @@ public class RegisterAbsence {
 	}
 	
 	public void logAbsence() {
-		controller.createAbsence(studentAbsenceList());
+		new DB_Controller().createAbsence(studentAbsenceList());
 	}
 
 }

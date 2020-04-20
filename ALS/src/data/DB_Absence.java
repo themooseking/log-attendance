@@ -35,46 +35,6 @@ public class DB_Absence {
 	/***********************************
 	 * READ
 	 ***********************************/
-
-	public ArrayList<Absence> getAllAbsence(ArrayList<Student> studentList, ArrayList<Course> courseList) {
-		ArrayList<Absence> absenceList = new ArrayList<>();
-
-		try {
-			String sql = "SELECT * FROM absence";
-
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(sql);
-
-			while (resultSet.next()) {
-				Date date = resultSet.getDate("absence_date");
-				LocalDate localDate = date.toLocalDate();
-				
-				Student student = null;
-				for (int i = 0; i < studentList.size(); i++) {
-					if (studentList.get(i).getStudentId() == resultSet.getInt("student_id")) {
-						student = studentList.get(i);
-						break;
-					}
-				}
-				
-				Course course = null;
-				for (int i = 0; i < courseList.size(); i++) {
-					if (courseList.get(i).getCourseId() == resultSet.getInt("course_id")) {
-						course = courseList.get(i);
-						break;
-					}
-				}
-
-				Absence absence = new Absence(localDate, student, course);
-
-				absenceList.add(absence);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return absenceList;
-	}
 	
 	public ArrayList<Absence> getAbsenceByCourse(ArrayList<Student> studentList, Course course) {
 		ArrayList<Absence> absenceList = new ArrayList<>();
